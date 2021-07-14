@@ -15,7 +15,6 @@
 <form action="/result" method="post">
     <label>English: </label><br/>
     <input type="text" name="english" placeholder="Search"><br/>
-
     <input type = "submit" id = "submit" value = "Convert" style="margin-top: 5px">
 </form>
 </body>
