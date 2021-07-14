@@ -18,6 +18,6 @@ public class DictionaryController {
     @PostMapping("/result")
     public String greeting(@RequestParam String english, Model model) {
         model.addAttribute("result", dictionaryService.translate(english));
-        return "/result";
+        return "/input";
     }
 }

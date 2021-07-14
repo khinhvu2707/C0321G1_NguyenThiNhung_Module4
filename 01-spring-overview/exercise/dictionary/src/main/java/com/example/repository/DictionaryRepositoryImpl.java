@@ -11,9 +11,9 @@ public class DictionaryRepositoryImpl implements DictionaryRepository{
         Map<String, String> dictionary = new HashMap<>();
         dictionary.put("hello", "Xin chào");
         dictionary.put("how", "Thế nào");
-        dictionary.put("book", "Quyển vở");
-        dictionary.put("computer", "Máy tính");
-        String result = dictionary.get(text);
+        dictionary.put("happy", "Hạnh phúc");
+        dictionary.put("bye", "Tạm biệt");
+        String result = dictionary.get(text.toLowerCase());
         String error = "Không có từ này trong từ điển!";
         if(result != null){
             return result;

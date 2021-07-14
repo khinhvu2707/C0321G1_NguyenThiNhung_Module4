@@ -11,11 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Currency Convert</h2>
+<h2>Dictionary English - Vietnamess</h2>
 <form action="/result" method="post">
     <label>English: </label><br/>
     <input type="text" name="english" placeholder="Search"><br/>
     <input type = "submit" id = "submit" value = "Convert" style="margin-top: 5px">
 </form>
+<p> Vietnamess: <span style="color: red">${result}</span></p>
 </body>
 </html>
