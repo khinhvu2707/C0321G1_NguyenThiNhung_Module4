@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.service.DictionaryService;
 import com.example.service.DictionaryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DictionaryController {
     @Autowired
-    private DictionaryServiceImpl dictionaryService;
+    private DictionaryService dictionaryService;
     @GetMapping("/")
     public String showInput() {
         return "/input";
