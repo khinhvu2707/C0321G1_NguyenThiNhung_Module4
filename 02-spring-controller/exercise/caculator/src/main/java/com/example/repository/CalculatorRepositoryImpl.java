@@ -10,7 +10,6 @@ public class CalculatorRepositoryImpl implements CaculatorRepository {
         double resultNumber = 0;
         String resultString = "";
         try {
-            CalculateException.checkOperand(secondOperand);
             if (operator.equals("+")) {
                 resultNumber = firstOperand + secondOperand;
             } else if (operator.equals("-")) {
@@ -20,6 +19,7 @@ public class CalculatorRepositoryImpl implements CaculatorRepository {
                 resultNumber = firstOperand * secondOperand;
 
             } else {
+                CalculateException.checkOperand(secondOperand);
                 resultNumber = firstOperand / secondOperand;
 
             }
