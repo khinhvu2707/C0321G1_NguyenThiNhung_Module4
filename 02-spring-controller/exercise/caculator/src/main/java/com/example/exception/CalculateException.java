@@ -1,4 +1,4 @@
-package com.example.Exception;
+package com.example.exception;
 
 public class CalculateException {
     public static void checkOperand(float secondOperand) throws Exception {

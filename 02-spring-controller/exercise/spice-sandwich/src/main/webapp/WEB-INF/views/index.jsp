@@ -14,10 +14,11 @@
 <body>
 <h1>Sandwich Condiments</h1>
 <form action="save" method="post">
-    <input type="checkbox" name="condiment" value="Lettuce">Lettuce
-    <input type="checkbox" name="condiment" value="Tomato">Tomato
-    <input type="checkbox" name="condiment" value="Mustard">Mustard
-    <input type="checkbox" name="condiment" value="Sprouts">Sprouts
+    <input onclick="check()" type="checkbox" name="condiment" value="Lettuce">Lettuce
+    <input onclick="check()" type="checkbox" name="condiment" value="Tomato">Tomato
+    <input onclick="check()" type="checkbox" name="condiment" value="Mustard">Mustard
+    <input onclick="check()" type="checkbox" name="condiment" value="Sprouts">Sprouts
+    <input onclick="check()" id="nothing" type="checkbox" name="condiment" value="nothing" checked hidden>
     <hr>
     <input type="submit" value="Save">
 </form>
@@ -25,5 +26,10 @@
 <c:forEach items="${result}" var="spice">
     <p style="color: red">${spice}</p>
 </c:forEach>
+<script>
+    function check() {
+        document.getElementById("nothing").checked = false;
+    }
+</script>
 </body>
 </html>
