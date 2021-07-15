@@ -36,7 +36,7 @@
                 <td><input name="secondOperand" type="text"/></td>
             </tr>
             <tr>
-                <td><input onclick="submit()" type="submit" value="Calculate"/></td>
+                <td><input type="submit" value="Calculate"/></td>
             </tr>
         </table>
     </fieldset>
@@ -49,10 +49,5 @@
                 document.getElementById("calculate").disabled = false;
     }
 </script>
-<%--<script>--%>
-<%--    function submit() {--%>
-<%--        document.getElementById("calculate").disabled = false;--%>
-<%--    }--%>
-<%--</script>--%>
 </body>
 </html>
