@@ -15,7 +15,7 @@
 <form action="/result" method="post">
     <label>English: </label><br/>
     <input type="text" name="english" placeholder="Search"><br/>
-    <input type = "submit" id = "submit" value = "Convert" style="margin-top: 5px">
+    <input type="submit" id="submit" value="Convert" style="margin-top: 5px">
 </form>
 <p> Vietnamess: <span style="color: red">${result}</span></p>
 </body>

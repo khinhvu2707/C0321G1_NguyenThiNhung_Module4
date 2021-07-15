@@ -17,7 +17,7 @@
     <input type="text" name="usd" placeholder="USD"><br/>
     <label>Rate: </label><br/>
     <input type="text" name="rate" placeholder="Rate"><br/>
-    <input type = "submit" id = "submit" value = "Convert" style="margin-top: 5px">
+    <input type="submit" id="submit" value="Convert" style="margin-top: 5px">
 </form>
 </body>
 </html>

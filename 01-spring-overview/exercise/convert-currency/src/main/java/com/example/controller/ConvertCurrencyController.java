@@ -7,19 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 @Controller
 public class ConvertCurrencyController {
-        @Autowired
-        private ConvertCurrencyService convertCurrency;
-        @GetMapping("/")
-        public String showInput() {
-            return "/input";
-        }
-        @PostMapping("/convert")
-        public String greeting(@RequestParam String usd,String rate, Model model) {
-            float inputUSD = Float.parseFloat(usd);
-            float inputRate = Float.parseFloat(rate);
-            model.addAttribute("result", convertCurrency.convert(inputUSD,inputRate));
-            return "/result";
-        }
+    @Autowired
+    private ConvertCurrencyService convertCurrency;
+
+    @GetMapping("/")
+    public String showInput() {
+        return "/input";
+    }
+
+    @PostMapping("/convert")
+    public String greeting(@RequestParam String usd, String rate, Model model) {
+        float inputUSD = Float.parseFloat(usd);
+        float inputRate = Float.parseFloat(rate);
+        model.addAttribute("result", convertCurrency.convert(inputUSD, inputRate));
+        return "/result";
+    }
 }

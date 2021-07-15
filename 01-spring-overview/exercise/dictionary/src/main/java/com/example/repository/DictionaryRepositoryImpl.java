@@ -4,8 +4,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Repository
-public class DictionaryRepositoryImpl implements DictionaryRepository{
+public class DictionaryRepositoryImpl implements DictionaryRepository {
     @Override
     public String translate(String text) {
         Map<String, String> dictionary = new HashMap<>();
@@ -15,7 +16,7 @@ public class DictionaryRepositoryImpl implements DictionaryRepository{
         dictionary.put("bye", "Tạm biệt");
         String result = dictionary.get(text.toLowerCase());
         String error = "Không có từ này trong từ điển!";
-        if(result != null){
+        if (result != null) {
             return result;
         } else {
             return error;
