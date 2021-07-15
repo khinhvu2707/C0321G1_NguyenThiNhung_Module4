@@ -14,14 +14,11 @@ public class CalculatorRepositoryImpl implements CaculatorRepository {
                 resultNumber = firstOperand + secondOperand;
             } else if (operator.equals("-")) {
                 resultNumber = firstOperand - secondOperand;
-
             } else if (operator.equals("*")) {
                 resultNumber = firstOperand * secondOperand;
-
             } else {
                 CalculateException.checkOperand(secondOperand);
                 resultNumber = firstOperand / secondOperand;
-
             }
             resultString = (firstOperand + " " + operator + " " + secondOperand + " = " + resultNumber);
         } catch (Exception ex) {
