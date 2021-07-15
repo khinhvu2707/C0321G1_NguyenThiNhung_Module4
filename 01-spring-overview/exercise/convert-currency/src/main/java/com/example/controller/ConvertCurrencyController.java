@@ -19,7 +19,7 @@ public class ConvertCurrencyController {
     }
 
     @PostMapping("/convert")
-    public String greeting(@RequestParam String usd, String rate, Model model) {
+    public String greeting(@RequestParam String usd, @RequestParam String rate, Model model) {
         float inputUSD = Float.parseFloat(usd);
         float inputRate = Float.parseFloat(rate);
         model.addAttribute("result", convertCurrency.convert(inputUSD, inputRate));
