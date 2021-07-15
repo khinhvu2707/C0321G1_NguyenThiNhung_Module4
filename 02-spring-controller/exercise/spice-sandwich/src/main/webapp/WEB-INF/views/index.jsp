@@ -13,7 +13,6 @@
 </head>
 <body>
 <h1>Sandwich Condiments</h1>
-
 <form action="save" method="post">
     <input type="checkbox" name="condiment" value="Lettuce">Lettuce
     <input type="checkbox" name="condiment" value="Tomato">Tomato

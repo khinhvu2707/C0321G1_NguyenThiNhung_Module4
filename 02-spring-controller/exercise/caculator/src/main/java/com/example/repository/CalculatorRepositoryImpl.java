@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.Exception.CalculateException;
 import org.springframework.stereotype.Repository;
 
 @Repository
