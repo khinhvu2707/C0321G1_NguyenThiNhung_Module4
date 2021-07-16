@@ -20,7 +20,7 @@ public class MailController {
     }
 
     @PostMapping("/update-email")
-    public ModelAndView createEmail(Model model, @ModelAttribute Email email) {
+    public ModelAndView createEmail(@ModelAttribute Email email) {
         ModelAndView modelAndView = new ModelAndView("result");
         modelAndView.addObject("email", email);
         return modelAndView;

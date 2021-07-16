@@ -13,7 +13,7 @@
 </head>
 <body>
 <h3>Home</h3>
-<form:form action="create-email" method="post" modelAttribute="email">
+<form:form action="update-email" method="post" modelAttribute="email">
     <fieldset>
         <legend>Settings</legend>
         <table>
