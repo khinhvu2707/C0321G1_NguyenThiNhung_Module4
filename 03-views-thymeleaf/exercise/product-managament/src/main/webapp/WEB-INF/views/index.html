@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Product</h3>
+<p><a th:href="@{/create}">
+    <button style="background-color: dodgerblue;float: left">Create</button>
+</a></p>
+
+<p>
+<form method="post" action="/search">
+    <input type="text" name="name" id="name" style="width: 100px;height: 30px;margin-left: 80%;float: left">
+    <input type="submit" value="Search"
+           style="width: 100px;height: 30px;background-color: darksalmon;text-align: center;margin-left: 7px">
+</form>
+</p>
+<div th:if="${success}">
+    <span th:text="${success}" style="color: red;margin: 5px"></span>
+</div>
+<table id="product" style="width: 100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Producer</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${products}">
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getPrice()}"></td>
+        <td th:text="${row.getDescription()}"></td>
+        <td th:text="${row.getProducer()}"></td>
+        <td><a th:href="@{/product/{id}/edit(id=${row.getId()})}">
+            <button style="background-color: aquamarine">Edit</button>
+        </a></td>
+        <td><a th:href="@{/product/{id}/delete(id=${row.getId()})}">
+            <button style="background-color: red">Delete</button>
+        </a></td>
+        <td><a th:href="@{/product/{id}/view(id=${row.getId()})}">
+            <button style="background-color: orange">View</button>
+        </a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
