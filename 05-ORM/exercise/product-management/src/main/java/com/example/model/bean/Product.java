@@ -3,7 +3,6 @@ package com.example.model.bean;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

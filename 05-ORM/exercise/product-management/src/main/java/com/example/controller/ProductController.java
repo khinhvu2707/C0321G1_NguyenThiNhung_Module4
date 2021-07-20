@@ -39,7 +39,6 @@ public class ProductController {
 
     @PostMapping("/save")
     public String save(Product product, RedirectAttributes redirectAttributes) {
-        product.setId((int) (Math.random() * 10000));
         productService.save(product);
         redirectAttributes.addFlashAttribute("success", " create " + product.getName() + " product success!");
         return "redirect:/product/";
@@ -52,8 +51,9 @@ public class ProductController {
     }
 
     @PostMapping("/update")
-    public String update(Product product) {
+    public String update(Product product, RedirectAttributes redirectAttributes) {
         productService.update(product.getId(), product);
+        redirectAttributes.addFlashAttribute("success", "Update " + product.getName() + " product success!");
         return "redirect:/product/";
     }
 
