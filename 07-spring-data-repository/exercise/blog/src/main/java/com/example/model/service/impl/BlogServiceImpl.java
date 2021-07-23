@@ -42,8 +42,8 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public List<Blog> findAllByCategory_Id(Long id) {
-        return iBlogRepository.findAllByCategory_Id(id);
+    public Page<Blog> findAllByCategory_Id(Long id, Pageable pageable) {
+        return iBlogRepository.findAllByCategory_Id(id,pageable);
     }
 
     @Override

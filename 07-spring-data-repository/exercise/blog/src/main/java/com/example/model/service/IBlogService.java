@@ -19,7 +19,7 @@ public interface IBlogService {
 
     List<Blog> findAllByCategory(Category category);
 
-    List<Blog> findAllByCategory_Id(Long id);
+    Page<Blog> findAllByCategory_Id(Long id, Pageable pageable);
 
     Page<Blog> findAll(Pageable pageable);
 

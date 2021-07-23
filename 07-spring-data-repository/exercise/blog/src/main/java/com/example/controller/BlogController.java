@@ -50,21 +50,20 @@ public class BlogController {
 
     @GetMapping("/blog")
     public ModelAndView list(@RequestParam(value = "searchByTitle",required = false) Optional<String> search,@RequestParam(value = "searchByCategory",required = false) Long searchByCategory, @PageableDefault(value = 5, sort = "date") Pageable pageable) {
-        Page<Blog> blogs = null;
-        List<Blog> blogByCategory = null;
+        Page<Blog> blogs;
         ModelAndView modelAndView = new ModelAndView("/blog/list");
+        List<Category> categoryList = categoryService.findAll();
+        modelAndView.addObject("categoryList", categoryList);
         if (search.isPresent()) {
             blogs = blogService.findAllByTitleContaining(search.get(), pageable);
             modelAndView.addObject("blogs", blogs);
         } else if (searchByCategory != null) {
-            blogByCategory = blogService.findAllByCategory_Id(searchByCategory);
-            modelAndView.addObject("blogByCategory", blogByCategory);
+            blogs = blogService.findAllByCategory_Id(searchByCategory,pageable);
+            modelAndView.addObject("blogs", blogs);
         } else {
             blogs = blogService.findAll(pageable);
             modelAndView.addObject("blogs", blogs);
         }
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         return modelAndView;
     }
 
