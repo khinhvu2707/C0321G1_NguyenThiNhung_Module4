@@ -43,51 +43,49 @@ public class BlogController {
         blog.setDate(newstring);
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/blog/create");
-        modelAndView.addObject("blog", new Blog());
+        List<Category> categoryList = categoryService.findAll();
+        modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("message", "New blog created successfully");
         return modelAndView;
     }
 
-    @GetMapping("/blog")
-    public ModelAndView list(@RequestParam(value = "searchByTitle",required = false) Optional<String> search,@RequestParam(value = "searchByCategory",required = false) Long searchByCategory, @PageableDefault(value = 5, sort = "date") Pageable pageable) {
-        Page<Blog> blogs;
+    @GetMapping
+    public ModelAndView list(@PageableDefault(value = 3, sort = "date") Pageable pageable,
+                             @RequestParam Optional<String> title, @RequestParam Optional<String> category) {
+        String keywordTitle = "";
+        String keywordCategory = "";
+        if (title.isPresent()) {
+            keywordTitle = title.get();
+        }
+        if (category.isPresent()) {
+            keywordCategory = category.get();
+        }
+        Page<Blog> blogs = blogService.findAllByTitleAnAndCategory(pageable, keywordTitle, keywordCategory);
         ModelAndView modelAndView = new ModelAndView("/blog/list");
+        modelAndView.addObject("blogs", blogs);
+        modelAndView.addObject("keywordTitle", keywordTitle);
+        modelAndView.addObject("keywordCategory", keywordCategory);
         List<Category> categoryList = categoryService.findAll();
         modelAndView.addObject("categoryList", categoryList);
-        if (search.isPresent()) {
-            blogs = blogService.findAllByTitleContaining(search.get(), pageable);
-            modelAndView.addObject("blogs", blogs);
-        } else if (searchByCategory != null) {
-            blogs = blogService.findAllByCategory_Id(searchByCategory,pageable);
-            modelAndView.addObject("blogs", blogs);
-        } else {
-            blogs = blogService.findAll(pageable);
-            modelAndView.addObject("blogs", blogs);
-        }
         return modelAndView;
     }
 
     @GetMapping("/edit-blog/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
-        if (blog != null) {
-            ModelAndView modelAndView = new ModelAndView("/blog/edit");
-            modelAndView.addObject("blog", blog);
-            List<Category> categoryList = categoryService.findAll();
-            modelAndView.addObject("categoryList", categoryList);
-            return modelAndView;
-
-        } else {
-            ModelAndView modelAndView = new ModelAndView("error.404");
-            return modelAndView;
-        }
+        ModelAndView modelAndView = new ModelAndView("/blog/edit");
+        modelAndView.addObject("blog", blog);
+        List<Category> categoryList = categoryService.findAll();
+        modelAndView.addObject("categoryList", categoryList);
+        return modelAndView;
     }
 
     @PostMapping("/edit-blog")
     public ModelAndView update(@ModelAttribute("blog") Blog blog) {
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/blog/edit");
-        modelAndView.addObject("blog", blog);
+        List<Category> categoryList = categoryService.findAll();
+        modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("message", "blog updated successfully");
         return modelAndView;
     }
@@ -95,15 +93,9 @@ public class BlogController {
     @GetMapping("/delete-blog/{id}")
     public ModelAndView showDeleteForm(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
-        if (blog != null) {
-            ModelAndView modelAndView = new ModelAndView("/blog/delete");
-            modelAndView.addObject("blog", blog);
-            return modelAndView;
-
-        } else {
-            ModelAndView modelAndView = new ModelAndView("error.404");
-            return modelAndView;
-        }
+        ModelAndView modelAndView = new ModelAndView("/blog/delete");
+        modelAndView.addObject("blog", blog);
+        return modelAndView;
     }
 
     @PostMapping("/delete-blog")
@@ -116,6 +108,14 @@ public class BlogController {
     public String view(@PathVariable Long id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
         return "/blog/view";
+    }
+
+    @GetMapping("/view-category/{id}")
+    public ModelAndView view(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("/category/view");
+        List<Blog> blogList = blogService.findAllByCategoryId(id);
+        modelAndView.addObject("blogs", blogList);
+        return modelAndView;
     }
 }
 

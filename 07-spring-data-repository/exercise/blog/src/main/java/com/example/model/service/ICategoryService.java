@@ -1,9 +1,7 @@
 package com.example.model.service;
 
 import com.example.model.bean.Category;
-
 import java.util.List;
-import java.util.Set;
 
 public interface ICategoryService {
     List<Category> findAll();
@@ -13,4 +11,5 @@ public interface ICategoryService {
     Category findById(Long id);
 
     void delete(Long id);
+
 }

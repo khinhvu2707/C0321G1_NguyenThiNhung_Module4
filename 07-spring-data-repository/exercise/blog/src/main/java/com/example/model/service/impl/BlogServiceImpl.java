@@ -1,7 +1,6 @@
 package com.example.model.service.impl;
 
 import com.example.model.bean.Blog;
-import com.example.model.bean.Category;
 import com.example.model.repository.IBlogRepository;
 import com.example.model.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,6 @@ import java.util.List;
 public class BlogServiceImpl implements IBlogService {
     @Autowired
     IBlogRepository iBlogRepository;
-
-    @Override
-    public List<Blog> findAll() {
-        return iBlogRepository.findAll();
-    }
 
     @Override
     public void save(Blog blog) {
@@ -37,24 +31,13 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public List<Blog> findAllByCategory(Category category) {
-        return iBlogRepository.findAllByCategory(category);
+    public Page<Blog> findAllByTitleAnAndCategory(Pageable pageable, String title, String categoryName) {
+        return iBlogRepository.findAllByTitleAnAndCategory(pageable, "%" + title + "%", "%"+categoryName+"%");
     }
 
     @Override
-    public Page<Blog> findAllByCategory_Id(Long id, Pageable pageable) {
-        return iBlogRepository.findAllByCategory_Id(id,pageable);
+    public List<Blog> findAllByCategoryId(Long id) {
+        return iBlogRepository.findAllByCategoryId(id);
     }
-
-    @Override
-    public Page<Blog> findAll(Pageable pageable) {
-        return iBlogRepository.findAll(pageable);
-    }
-
-    @Override
-    public Page<Blog> findAllByTitleContaining(String title, Pageable pageable) {
-        return iBlogRepository.findAllByTitleContaining(title, pageable);
-    }
-
 
 }

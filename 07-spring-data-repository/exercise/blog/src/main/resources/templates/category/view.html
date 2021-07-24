@@ -9,16 +9,36 @@
         Back to Category list
     </a>
 </p>
-<div id="blog">
-    <div>
-        <label style="color: red">Id:</label>
-        <label th:text="${category.id}"></label>
-    </div>
-    <div>
-        <label style="color: red">Name:</label>
-        <label th:text="${category.name}"></label>
-    </div>
-</div>
+<table border="1" id="blog">
+    <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Summary</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    <tr th:each="blog,iStatus : ${blogs}">
+        <td th:text="${iStatus.count}"></td>
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.title}"></td>
+        <td th:text="${blog.summary}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td th:text="${blog.date}"></td>
+        <td><a th:href="@{/edit-blog/__${blog.id}__ }">
+            <button style="background-color: aquamarine">Edit</button>
+        </a></td>
+        <td><a th:href="@{/delete-blog/__${blog.id}__ }">
+            <button style="background-color: red">Delete</button>
+        </a></td>
+        <td><a th:href="@{/view-blog/__${blog.id}__ }">
+            <button style="background-color: orange">View</button>
+        </a></td>
+    </tr>
+</table>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
