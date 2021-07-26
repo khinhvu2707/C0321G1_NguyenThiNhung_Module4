@@ -30,6 +30,7 @@ public class FormController {
 
         new UserDto().validate(userDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("userDto",userDto);
             return "/index";
         } else {
             User user = new User();
