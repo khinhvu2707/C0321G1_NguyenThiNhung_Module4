@@ -10,7 +10,7 @@ public class AppConfiguration {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("message/validation_message");
+        messageSource.setBasenames("message/validation-message");
         return messageSource;
     }
 }

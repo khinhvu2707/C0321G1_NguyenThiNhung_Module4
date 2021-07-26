@@ -43,6 +43,7 @@ public class BlogController {
         blog.setDate(newstring);
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/blog/create");
+        modelAndView.addObject("blog", new Blog());
         List<Category> categoryList = categoryService.findAll();
         modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("message", "New blog created successfully");

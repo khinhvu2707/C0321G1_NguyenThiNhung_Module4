@@ -39,6 +39,7 @@ public class CategoryController {
     public ModelAndView save(@ModelAttribute("category") Category category) {
         categoryService.save(category);
         ModelAndView modelAndView = new ModelAndView("/category/create");
+        modelAndView.addObject("category", new Category());
         modelAndView.addObject("message", "New category created successfully");
         return modelAndView;
     }

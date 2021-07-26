@@ -1,30 +1,19 @@
-package com.example.model;
-
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
+package com.example.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.*;
 
 @Entity
-public class User implements Validator {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
-    @Size(min=5,max = 45)
     private String firstName;
-    @NotEmpty
-    @Size(min=5,max = 45)
     private String lastName;
     private String phoneNumber;
-    @Min(18)
     private int age;
-    @Email
     private String email;
 
     public User() {
@@ -87,25 +76,4 @@ public class User implements Validator {
         this.email = email;
     }
 
-
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return User.class.isAssignableFrom(clazz);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        User user =(User) target;
-        String number = user.getPhoneNumber();
-        ValidationUtils.rejectIfEmpty(errors, "number", "number.empty");
-        if (number.length()>11 || number.length()<10){
-            errors.rejectValue("number", "number.length");
-        }
-        if (!number.startsWith("0")){
-            errors.rejectValue("number", "number.startsWith");
-        }
-        if (!number.matches("(^$|[0-9]*$)")){
-            errors.rejectValue("number", "number.matches");
-        }
-    }
 }
