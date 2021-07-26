@@ -34,7 +34,7 @@ public class FormController {
         } else {
             User user = new User();
             BeanUtils.copyProperties(userDto, user);
-            model.addAttribute("user", user);
+            userService.save(user);
             return "/result";
         }
     }

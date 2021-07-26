@@ -9,17 +9,17 @@ import javax.validation.constraints.*;
 
 public class UserDto implements Validator {
     private Long id;
-    @NotEmpty
-    @Size(min=5,max = 45)
+    @NotBlank(message = "Tên không được để trống")
+    @Size(min=5,max = 45,message = "Tên phải có ít nhất 5 kí tự,nhiều nhất 45 kí tự")
     private String firstName;
-    @NotEmpty
-    @Size(min=5,max = 45)
+    @NotBlank(message = "Tên không được để trống")
+    @Size(min=5,max = 45,message = "Tên phải có ít nhất 5 kí tự,nhiều nhất 45 kí tự")
     private String lastName;
     private String phoneNumber;
-    @Min(18)
+    @Min(value = 18,message = "Tuổi phải lớn hơn hoặc bằng 18")
     private int age;
-    @NotBlank
-    @Email
+    @NotBlank(message = "Tên không được để trống")
+    @Email(message = "Email không đúng định dạng")
     private String email;
 
     public UserDto() {

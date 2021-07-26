@@ -11,6 +11,7 @@ public class AppConfiguration {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("validate/validation-message");
+        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
 }
