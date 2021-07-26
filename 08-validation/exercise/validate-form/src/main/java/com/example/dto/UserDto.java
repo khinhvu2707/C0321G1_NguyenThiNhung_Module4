@@ -5,10 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class UserDto implements Validator {
     private Long id;
@@ -21,6 +18,7 @@ public class UserDto implements Validator {
     private String phoneNumber;
     @Min(18)
     private int age;
+    @NotBlank
     @Email
     private String email;
 
