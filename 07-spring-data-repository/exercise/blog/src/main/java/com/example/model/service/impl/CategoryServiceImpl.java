@@ -33,4 +33,9 @@ public class CategoryServiceImpl implements ICategoryService {
         categoryRepository.delete(findById(id));
     }
 
+    @Override
+    public List<Category> findCategoryByNameLike(String name) {
+        return categoryRepository.findCategoryByNameLike("%"+name+"%");
+    }
+
 }

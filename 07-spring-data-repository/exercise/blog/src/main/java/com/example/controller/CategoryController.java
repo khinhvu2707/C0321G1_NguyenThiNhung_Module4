@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CategoryController {
@@ -16,10 +17,14 @@ public class CategoryController {
     private ICategoryService categoryService;
 
     @GetMapping("/category")
-    public ModelAndView list() {
-        List<Category> provinces = categoryService.findAll();
+    public ModelAndView list(@RequestParam Optional<String> category) {
+        String keywordCategory = "";
+        if (category.isPresent()) {
+            keywordCategory = category.get();
+        }
+        List<Category> categories = categoryService.findCategoryByNameLike(keywordCategory);
         ModelAndView modelAndView = new ModelAndView("/category/list");
-        modelAndView.addObject("categorys", provinces);
+        modelAndView.addObject("categorys", categories);
         return modelAndView;
     }
 

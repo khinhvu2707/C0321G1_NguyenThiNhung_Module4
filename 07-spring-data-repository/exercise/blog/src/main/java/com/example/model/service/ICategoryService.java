@@ -12,4 +12,5 @@ public interface ICategoryService {
 
     void delete(Long id);
 
+    List<Category> findCategoryByNameLike(String name);
 }

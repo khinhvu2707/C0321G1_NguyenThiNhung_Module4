@@ -4,6 +4,12 @@
 <body>
 <header th:replace="/layout :: header"></header>
 <h2>Category</h2>
+
+<form action="/category">
+    <p style="float: left;display: inline-block;height: 10%">Search by Name:</p>
+    <input name="category" type="text" style="width: 20%;height:10px;float: left"/>
+    <input type="submit" value="Search" style="width: 5%;height: 10px;margin-left: 5px"/>
+</form>
 <a href="/create-category"><button style="background-color: greenyellow;margin: 5px">Create</button></a>
 
 <table border="1" id="blog">
