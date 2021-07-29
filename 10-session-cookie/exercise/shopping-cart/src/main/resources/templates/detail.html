@@ -11,22 +11,21 @@
         <div class="container">
             <div class="card mb-3">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img th:src="${product.image}" width="400px">
+                    <div class="card">
+                        <img th:src="${product.image}" width="100%">
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body" style="text-align: center">
-                            <h4>Mã sản phẩm</h4>
-                            <h5 class="card-title" th:text="${product.code}"></h5>
-                            <hr>
-                            <p>Giá sản phẩm</p>
-                            <p class="card-text" th:text="${product.price}"></p>
-                            <button type="button" class="btn btn-danger"><a
-                                    th:href="@{/add/__${product.id}__(action='list')}">Mua ngay</a></button>
-                        </div>
+                    <div class="card-body" style="text-align: center">
+                        <h4>Mã sản phẩm</h4>
+                        <h5 class="card-title" th:text="${product.code}"></h5>
+                        <hr>
+                        <p>Giá sản phẩm</p>
+                        <p class="card-text" th:text="${product.price}"></p>
+                        <button type="button" class="btn btn-danger"><a
+                                th:href="@{/add/__${product.id}__(action='list')}">Mua ngay</a></button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </td>
     <td style="width: 70%;text-align: center">
