@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/blog/api")
@@ -26,9 +27,9 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Blog> viewBlog(@PathVariable Long id) {
-        Blog blog = blogService.findById(id);
-        if (blog == null) {
+    public ResponseEntity<Optional<Blog>> viewBlog(@PathVariable Long id) {
+        Optional<Blog> blog = blogService.findById(id);
+        if (!blog.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(blog, HttpStatus.OK);
