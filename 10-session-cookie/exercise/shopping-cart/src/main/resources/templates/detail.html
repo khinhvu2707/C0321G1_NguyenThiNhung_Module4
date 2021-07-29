@@ -6,28 +6,30 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
-<table>
-    <td style="width: 40%">
+<table style="width: 100%">
+    <td style="width: 30%">
             <div class="card mb-3">
                     <div class="card">
-                        <img th:src="${product.image}" style="height: 420px">
+                        <img th:src="${product.image}" style="height: 450px">
                     </div>
                     <div class="card-body" style="text-align: center">
-                        <h4>Mã sản phẩm</h4>
-                        <h5 class="card-title" th:text="${product.code}"></h5>
+                        <p>Mã sản phẩm</p>
+                        <h3 class="card-title" th:text="${product.code}"></h3>
                         <hr>
                         <p>Giá sản phẩm</p>
-                        <p class="card-text" th:text="${product.price}"></p>
+                        <h5 class="card-text" th:text="${product.price}"></h5>
                         <button type="button" class="btn btn-danger"><a
                                 th:href="@{/add/__${product.id}__(action='list')}">Mua ngay</a></button>
                     </div>
             </div>
         </div>
     </td>
-    <td style="width: 60%;text-align: center">
-        <p class="card-text" th:text="${product.name}" style="color: red">Tên sản phẩm : </p>
+    <td style="width: 70%;text-align: center">
+        <span th:text="${product.name}" style="color: red">Tên sản phẩm : </span>
         <hr>
-        <p class="card-text" th:text="${product.description}">Mô tả : </p>
+        <div class="alert alert-primary" role="alert">
+        <p th:text="${product.description}">Mô tả : </p>
+        </div>
     </td>
 </table>
 <script src="/jquery/jquery-3.5.1.min.js"></script>

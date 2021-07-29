@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
-<p>
+<div class="alert alert-danger" role="alert">
     <a href="/shop">Shop</a>
-</p>
+</div>
 <h4>Your Cart</h4>
 <form th:action="@{/shop}" th:object="${cart}" method="post">
     <p>Total Items: <span th:text="${cart.countItemQuantity()}"></span></p>
