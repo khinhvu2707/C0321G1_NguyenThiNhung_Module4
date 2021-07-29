@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/blog/api")
-public class BlogController {
+public class BlogRestController {
 
     @Autowired
     private IBlogService blogService;

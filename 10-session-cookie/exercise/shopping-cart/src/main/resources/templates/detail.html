@@ -24,10 +24,10 @@
             </div>
         </div>
     </td>
-    <td style="width: 70%;text-align: center">
-        <span th:text="${product.name}" style="color: red">Tên sản phẩm : </span>
+    <td style="width: 70%">
+        <div th:text="${product.name}" style="color: red;text-align: center">Tên sản phẩm : </div>
         <hr>
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-primary" role="alert" style="text-align: center">
         <p th:text="${product.description}">Mô tả : </p>
         </div>
     </td>

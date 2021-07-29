@@ -28,12 +28,15 @@ public class BlogController {
     @Autowired
     private ICategoryService categoryService;
 
+    @ModelAttribute("categoryList")
+    public List<Category> categoryList(){
+        return categoryService.findAll();
+    }
+
     @GetMapping("/create-blog")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/blog/create");
         modelAndView.addObject("blog", new Blog());
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         return modelAndView;
     }
 
@@ -44,8 +47,6 @@ public class BlogController {
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/blog/create");
         modelAndView.addObject("blog", new Blog());
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("message", "New blog created successfully");
         return modelAndView;
     }
@@ -66,8 +67,6 @@ public class BlogController {
         modelAndView.addObject("blogs", blogs);
         modelAndView.addObject("keywordTitle", keywordTitle);
         modelAndView.addObject("keywordCategory", keywordCategory);
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         return modelAndView;
     }
 
@@ -76,8 +75,6 @@ public class BlogController {
         Blog blog = blogService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/blog/edit");
         modelAndView.addObject("blog", blog);
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         return modelAndView;
     }
 
@@ -85,8 +82,6 @@ public class BlogController {
     public ModelAndView update(@ModelAttribute("blog") Blog blog) {
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/blog/edit");
-        List<Category> categoryList = categoryService.findAll();
-        modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("message", "blog updated successfully");
         return modelAndView;
     }

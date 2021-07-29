@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blog/api")
-public class CategoryController {
+public class CategoryRestController {
 
     @Autowired
     private ICategoryService categoryService;
