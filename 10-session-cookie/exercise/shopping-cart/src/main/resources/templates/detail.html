@@ -6,13 +6,11 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
-<table border="1px solid">
-    <td style="width: 30%">
-        <div class="container">
+<table>
+    <td style="width: 40%">
             <div class="card mb-3">
-                <div class="row g-0">
                     <div class="card">
-                        <img th:src="${product.image}" width="100%">
+                        <img th:src="${product.image}" style="height: 420px">
                     </div>
                     <div class="card-body" style="text-align: center">
                         <h4>Mã sản phẩm</h4>
@@ -23,12 +21,10 @@
                         <button type="button" class="btn btn-danger"><a
                                 th:href="@{/add/__${product.id}__(action='list')}">Mua ngay</a></button>
                     </div>
-                </div>
             </div>
         </div>
-        </div>
     </td>
-    <td style="width: 70%;text-align: center">
+    <td style="width: 60%;text-align: center">
         <p class="card-text" th:text="${product.name}" style="color: red">Tên sản phẩm : </p>
         <hr>
         <p class="card-text" th:text="${product.description}">Mô tả : </p>

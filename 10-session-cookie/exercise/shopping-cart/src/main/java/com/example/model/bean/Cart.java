@@ -40,9 +40,11 @@ public class Cart {
             products.put(product, 1);
         } else if (action.equals("-")) {
             Map.Entry<Product, Integer> itemEntry = selectItemInCart(product);
-            if (itemEntry.getValue() != 0) {
+            if (itemEntry.getValue() != 1) {
                 Integer newQuantity = itemEntry.getValue() - 1;
                 products.replace(itemEntry.getKey(), newQuantity);
+            } else {
+                products.remove(itemEntry.getKey());
             }
         } else if (action.equals("+")) {
             Map.Entry<Product, Integer> itemEntry = selectItemInCart(product);
