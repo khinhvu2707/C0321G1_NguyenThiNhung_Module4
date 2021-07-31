@@ -32,19 +32,5 @@ public class BlogRestController {
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 
-
-//    @GetMapping("/search")
-//    public ResponseEntity<List<Blog>> listBlog(@RequestParam Optional<String> title) {
-//
-//        String keywordTitle = "";
-//        if (title.isPresent()) {
-//            keywordTitle = title.get();
-//        }
-//        List<Blog> blogList = blogService.findAllByTitleContaining(keywordTitle);
-//        if (blogList.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(blogList, HttpStatus.OK);
-//    }
 }
 
