@@ -1,21 +1,9 @@
 package com.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
-@Table(name="division")
 public class Division {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int divisionId;
     private String divisionName;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
-    private Set<Employee> employeeSet;
 
     public Division() {
     }

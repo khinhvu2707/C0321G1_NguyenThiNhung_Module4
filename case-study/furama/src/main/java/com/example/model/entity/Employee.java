@@ -32,8 +32,10 @@ public class Employee {
     @ManyToOne(targetEntity = Division.class)
     @JoinColumn(name = "division_id",referencedColumnName = "divisionId")
     private Division division;
-    private String username;
-
+    @JsonManagedReference
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "usename",referencedColumnName = "usename")
+    private User user;
     @JsonBackReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private Set<Contract> contractSet;
@@ -41,7 +43,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, String username, Set<Contract> contractSet) {
+    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, User user, Set<Contract> contractSet) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -53,7 +55,7 @@ public class Employee {
         this.position = position;
         this.educationDegree = educationDegree;
         this.division = division;
-        this.username = username;
+        this.user = user;
         this.contractSet = contractSet;
     }
 
@@ -145,12 +147,12 @@ public class Employee {
         this.division = division;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Contract> getContractSet() {

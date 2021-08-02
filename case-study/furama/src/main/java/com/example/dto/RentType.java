@@ -1,22 +1,12 @@
 package com.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
-@Table(name="rentType")
 public class RentType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int RentTypeId;
     private String rentTypeName;
     private double rentTypeCost;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "rentType", cascade = CascadeType.ALL)
-    private Set<Service> serviceSet;
     public RentType() {
     }
 

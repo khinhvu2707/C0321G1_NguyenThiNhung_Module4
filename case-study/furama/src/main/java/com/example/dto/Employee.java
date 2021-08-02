@@ -1,16 +1,8 @@
 package com.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.util.Set;
 
-@Entity
-@Table(name="employee")
 public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
     private String employeeName;
     @Column(columnDefinition = "DATE")
@@ -20,28 +12,15 @@ public class Employee {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAddress;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = Position.class)
-    @JoinColumn(name = "position_id",referencedColumnName = "positionId")
     private Position position;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = EducationDegree.class)
-    @JoinColumn(name = "education_degree_id",referencedColumnName = "educationDegreeId")
     private EducationDegree educationDegree;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = Division.class)
-    @JoinColumn(name = "division_id",referencedColumnName = "divisionId")
     private Division division;
     private String username;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Set<Contract> contractSet;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, String username, Set<Contract> contractSet) {
+    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, String username) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -54,7 +33,6 @@ public class Employee {
         this.educationDegree = educationDegree;
         this.division = division;
         this.username = username;
-        this.contractSet = contractSet;
     }
 
     public int getEmployeeId() {
@@ -153,11 +131,4 @@ public class Employee {
         this.username = username;
     }
 
-    public Set<Contract> getContractSet() {
-        return contractSet;
-    }
-
-    public void setContractSet(Set<Contract> contractSet) {
-        this.contractSet = contractSet;
-    }
 }

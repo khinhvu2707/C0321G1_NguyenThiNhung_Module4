@@ -1,42 +1,24 @@
 package com.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
-@Table(name = "service")
 public class Service {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceId;
     private String serviceCode;
     private String serviceName;
     private int serviceArea;
     private double serviceCost;
     private int serviceMaxPeople;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = RentType.class)
-    @JoinColumn(name = "rent_type_id",referencedColumnName = "rentTypeId")
     private RentType rentType;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = ServiceType.class)
-    @JoinColumn(name = "service_type_id",referencedColumnName = "serviceTypeId")
     private ServiceType serviceType;
     private String standardRoom;
     private String descriptionOtherConvenience;
     private double poolArea;
     private int numberOfFloor;
-    @JsonBackReference
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
-    private Set<Contract> contractSet;
 
     public Service() {
     }
 
-    public Service(int serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
+    public Service(int serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
@@ -49,7 +31,6 @@ public class Service {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
         this.poolArea = poolArea;
         this.numberOfFloor = numberOfFloor;
-        this.contractSet = contractSet;
     }
 
     public int getServiceId() {
@@ -148,11 +129,4 @@ public class Service {
         this.numberOfFloor = numberOfFloor;
     }
 
-    public Set<Contract> getContractSet() {
-        return contractSet;
-    }
-
-    public void setContractSet(Set<Contract> contractSet) {
-        this.contractSet = contractSet;
-    }
 }

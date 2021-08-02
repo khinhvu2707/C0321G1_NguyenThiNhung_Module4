@@ -1,21 +1,10 @@
 package com.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.util.Set;
 
-@Entity
-@Table(name="customer")
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String customerCode;
-    @JsonManagedReference
-    @ManyToOne(targetEntity = CustomerType.class)
-    @JoinColumn(name = "customer_type_id",referencedColumnName = "customerTypeId")
     private CustomerType customerType;
     private String customerName;
     @Column(columnDefinition = "DATE")
@@ -25,15 +14,10 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private Set<Contract> contractSet;
-
     public Customer() {
     }
 
-    public Customer(int customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, Set<Contract> contractSet) {
+    public Customer(int customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress) {
         this.customerId = customerId;
         this.customerCode = customerCode;
         this.customerType = customerType;
@@ -44,7 +28,6 @@ public class Customer {
         this.customerPhone = customerPhone;
         this.customerEmail = customerEmail;
         this.customerAddress = customerAddress;
-        this.contractSet = contractSet;
     }
 
     public int getCustomerId() {
@@ -127,11 +110,4 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public Set<Contract> getContractSet() {
-        return contractSet;
-    }
-
-    public void setContractSet(Set<Contract> contractSet) {
-        this.contractSet = contractSet;
-    }
 }
