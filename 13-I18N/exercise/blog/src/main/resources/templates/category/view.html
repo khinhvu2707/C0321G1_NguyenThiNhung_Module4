@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<header th:replace="/layout :: header"></header>
+<h3 th:text="#{view}">></h3>
+<p>
+    <a th:href="@{/category}" th:text="#{category.list}">>
+    </a>
+</p>
+<table border="1" id="blog">
+    <tr>
+        <th>No</th>
+        <th th:text="#{title}"></th>
+        <th th:text="#{summary}"></th>
+        <th th:text="#{category}"></th>
+        <th th:text="#{date}"></th>
+        <th th:text="#{edit}"></th>
+        <th th:text="#{delete}"></th>
+        <th th:text="#{view}"></th>
+    </tr>
+    <tr th:each="blog,iStatus : ${blogs}">
+        <td th:text="${iStatus.count}"></td>
+        <td th:text="${blog.title}"></td>
+        <td th:text="${blog.summary}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td th:text="${blog.date}"></td>
+        <td><a th:href="@{/edit-blog/__${blog.id}__ }">
+            <button style="background-color: aquamarine" th:text="#{edit}">></button>
+        </a></td>
+        <td><a th:href="@{/delete-blog/__${blog.id}__ }">
+            <button style="background-color: red" th:text="#{delete}">></button>
+        </a></td>
+        <td><a th:href="@{/view-blog/__${blog.id}__ }">
+            <button style="background-color: orange" th:text="#{view}">></button>
+        </a></td>
+    </tr>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

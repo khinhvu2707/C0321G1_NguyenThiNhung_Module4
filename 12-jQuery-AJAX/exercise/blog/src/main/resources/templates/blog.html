@@ -7,7 +7,8 @@
 <body>
 <h2>Blog</h2>
 <p style="float: left;display: inline-block;height: 10%">Search by Title:</p>
-<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="inputTitle" name="title" autocomplete="off">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="inputTitle" name="title"
+       autocomplete="off">
 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">Search</button>
 <table class="table table-striped">
     <thead>
@@ -28,21 +29,21 @@
 <script src="/jquery/popper.min.js"></script>
 <script src="/bootstrap4/js/bootstrap.js"></script>
 <script>
-    let page=0;
+    let page = 0;
 
     function successHandler() {
-        let title=$("#inputTitle").val();
+        let title = $("#inputTitle").val();
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/blog/api/?page=" +page +"&title="+title,
+            url: "http://localhost:8080/blog/api/?page=" + page + "&title=" + title,
             type: "GET",
             success: function (data) {
                 console.log("Success");
-                if(typeof data === 'undefined' || !data.content.length){
-                    $("#check").css("display","block");
+                if (typeof data === 'undefined' || !data.content.length) {
+                    $("#check").css("display", "block");
                     console.log("Success7777");
                 }
                 let tr = [];
@@ -57,7 +58,7 @@
                 }
                 $('table').append($(tr.join('')));
             },
-            error: function(error) {
+            error: function (error) {
                 console.log("Error: ");
                 console.log(error);
             }
@@ -65,20 +66,17 @@
     }
 
     $(document).ready(function () {
-       successHandler();
+        successHandler();
     })
-
     $("#search").click(function () {
-        page=0;
+        page = 0;
         $('table').empty();
         successHandler();
     })
-
     $("#next").click(function () {
         page++;
-       successHandler();
+        successHandler();
     })
-
 </script>
 </body>
 </html>

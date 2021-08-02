@@ -1,32 +1,29 @@
 package com.example.model.bean;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String summary;
     private String content;
     @Column(columnDefinition = "DATETIME")
     private String date;
-    @JsonManagedReference
+
     @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id" , referencedColumnName = "id")
     private Category category;
 
     public Blog(Category category) {
         this.category = category;
     }
 
-    public Blog() {
+    public Blog(){
 
     }
-
     public Blog(Long id, String title, String summary, String content) {
         this.id = id;
         this.title = title;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<header th:replace="/layout :: header"></header>
+<h3 th:text="#{delete}"></h3>
+<p>
+    <a href="/blog" th:text="#{blog.list}"></a>
+</p>
+<form th:action="@{/delete-blog}" th:object="${blog}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td th:text="#{title}"></td>
+            <td><input type="text" th:field="*{title}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{summary}"></td>
+            <td><input type="text" th:field="*{summary}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{content}"></td>
+            <td><input type="text" th:field="*{content}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{category}"></td>
+            <td><input type="text" th:field="*{category.name}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{date}"></td>
+            <td><input type="text" th:field="*{date}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" th:text="#{delete}"></button></td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<header th:replace="/layout :: header"></header>
+<p>
+    <a href="/blog" th:text="#{blog.list}"></a>
+</p>
+<div th:if="${message}">
+    <span th:text="${message}" style="color: red;margin: 5px"></span>
+</div>
+<form th:action="@{/edit-blog}" th:object="${blog}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td th:text="#{title}"></td>
+            <td><input type="text" th:field="*{title}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{summary}"></td>
+            <td><input type="text" th:field="*{summary}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{content}"></td>
+            <td><input type="text" th:field="*{content}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{date}"></td>
+            <td><input type="text" th:field="*{date}" readonly/></td>
+        </tr>
+        <tr>
+            <td th:text="#{category}"></td>
+            <td>
+                <select th:field="*{category.id}">
+                    <option th:each="c : ${categoryList}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" th:text="#{update}"></button></td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

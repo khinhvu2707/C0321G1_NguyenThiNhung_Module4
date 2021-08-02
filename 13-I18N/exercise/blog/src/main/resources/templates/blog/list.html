@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<header th:replace="/layout :: header"></header>
+<p th:text="#{language}"> </p>
+<div style="margin: 5px"><a href="?lang=en" th:text="#{english}"></a> | <a href="?lang=vi" th:text="#{vietnamese}"></a></div>
+<a href="/create-blog"><button style="background-color: greenyellow;padding: 3px" th:text="#{create}"></button></a>
+<form action="/blog">
+    <p style="float: left;display: inline-block;height: 10%" th:text="#{search.title}"></p>
+    <input name="title" type="text" style="width: 20%;height:10px;float: left"/>
+    <p style="float: left;display: inline-block;height: 10px;width: 15%" th:text="#{search.category}"></p>
+    <select name="category" style="display: inline-block;width: 10%;height: 25px;margin-bottom: 3px">
+        <option disabled="disabled" selected="selected" value="" th:text="#{category}"></option>
+        <option th:each="c : ${categoryList}" th:value="${c.name}" th:text="${c.name}"></option>
+    </select>
+    <button type="submit" th:text="#{search}"></button>
+</form>
+
+<table border="1" id="blog">
+    <tr>
+        <th>No</th>
+        <th th:text="#{title}"></th>
+        <th th:text="#{summary}"></th>
+        <th th:text="#{category}"></th>
+        <th th:text="#{date}"></th>
+        <th th:text="#{edit}"></th>
+        <th th:text="#{delete}"></th>
+        <th th:text="#{view}"></th>
+    </tr>
+    <tr th:each="blog,iStatus : ${blogs}">
+        <td th:text="${iStatus.count}"></td>
+        <td th:text="${blog.title}"></td>
+        <td th:text="${blog.summary}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td th:text="${blog.date}"></td>
+        <td><a th:href="@{/edit-blog/__${blog.id}__ }">
+            <button style="background-color: aquamarine" th:text="#{edit}"></button>
+        </a></td>
+        <td><a th:href="@{/delete-blog/__${blog.id}__ }">
+            <button style="background-color: red" th:text="#{delete}"></button>
+        </a></td>
+        <td><a th:href="@{/view-blog/__${blog.id}__ }">
+            <button style="background-color: orange" th:text="#{view}"></button>
+        </a></td>
+    </tr>
+</table>
+<p>
+    <a th:if="${blogs.hasPrevious()}"
+       th:href="@{/blog(page=${blogs.number - 1},title=${keywordTitle}, id=${keywordCategory})}" th:text="#{previous}">
+    </a>
+    <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+    <a th:if="${blogs.hasNext()}"
+       th:href="@{/blog(page=${blogs.number + 1},title=${keywordTitle}, id=${keywordCategory})}" th:text="#{next}">
+    </a>
+</p>
+<p>
+    <a th:href="@{/category}">
+       <p th:text="#{category.list}"></p>
+    </a>
+</p>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
