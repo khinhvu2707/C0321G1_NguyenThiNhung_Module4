@@ -10,15 +10,15 @@ import javax.persistence.*;
 public class UserRole {
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_Id", nullable = false)
+    @JoinColumn(name = "User_Id", nullable = false)
     private AppUser appUser;
 
     @ManyToOne
-    @JoinColumn(name = "role_Id", nullable = false)
+    @JoinColumn(name = "Role_Id", nullable = false)
     private AppRole appRole;
 
     public Long getId() {

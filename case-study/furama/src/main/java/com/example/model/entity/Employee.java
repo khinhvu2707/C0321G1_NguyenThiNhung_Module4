@@ -33,9 +33,9 @@ public class Employee {
     @JoinColumn(name = "division_id",referencedColumnName = "divisionId")
     private Division division;
     @JsonManagedReference
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "usename",referencedColumnName = "usename")
-    private User user;
+    @ManyToOne(targetEntity = AppUser.class)
+    @JoinColumn(name = "username",referencedColumnName = "user_name")
+    private AppUser appUser;
     @JsonBackReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private Set<Contract> contractSet;
@@ -43,7 +43,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, User user, Set<Contract> contractSet) {
+    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -55,7 +55,7 @@ public class Employee {
         this.position = position;
         this.educationDegree = educationDegree;
         this.division = division;
-        this.user = user;
+        this.appUser = appUser;
         this.contractSet = contractSet;
     }
 
@@ -147,12 +147,12 @@ public class Employee {
         this.division = division;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Set<Contract> getContractSet() {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<header th:replace="/layout :: header"></header>
+<h2>Category</h2>
+
+<form action="/category">
+    <p style="float: left;display: inline-block;height: 10%">Search by Name:</p>
+    <input name="category" type="text" style="width: 20%;height:10px;float: left"/>
+    <input type="submit" value="Search" style="width: 5%;height: 10px;margin-left: 5px"/>
+</form>
+<a href="/create-category"><button style="background-color: greenyellow;margin: 5px">Create</button></a>
+
+<table border="1" id="blog">
+    <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    <tr th:each="category,iStatus : ${categorys}">
+        <td th:text="${iStatus.count}"></td>
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td><a th:href="@{/edit-category/__${category.id}__ }">
+            <button style="background-color: aquamarine">Edit</button>
+        </a></td>
+        <td><a th:href="@{/delete-category/__${category.id}__ }">
+            <button style="background-color: red">Delete</button>
+        </a></td>
+        <td><a th:href="@{/view-category/__${category.id}__ }">
+            <button style="background-color: orange">View</button>
+        </a></td>
+    </tr>
+</table>
+<p>
+    <a href="/blog">Blog list</a>
+</p>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
