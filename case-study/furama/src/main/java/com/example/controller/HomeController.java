@@ -11,24 +11,4 @@ public class HomeController {
     public  String showHome(){
         return "/homePage";
     }
-
-    @GetMapping("/list")
-    public String showList(){
-        return "/crud/list";
-    }
-
-    @GetMapping("/create")
-    public String showCreate(){
-        return "/crud/create";
-    }
-
-    @GetMapping("/edit")
-    public String showEdit(){
-        return "crud/editHome";
-    }
-
-    @GetMapping("/contract-edit")
-    public String showEditContract(){
-        return "contract/edit";
-    }
 }

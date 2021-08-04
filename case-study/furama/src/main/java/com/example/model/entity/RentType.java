@@ -10,7 +10,7 @@ import java.util.Set;
 public class RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int RentTypeId;
+    private Long RentTypeId;
     private String rentTypeName;
     private double rentTypeCost;
 
@@ -20,17 +20,17 @@ public class RentType {
     public RentType() {
     }
 
-    public RentType(int rentTypeId, String rentTypeName, double rentTypeCost) {
+    public RentType(Long rentTypeId, String rentTypeName, double rentTypeCost) {
         RentTypeId = rentTypeId;
         this.rentTypeName = rentTypeName;
         this.rentTypeCost = rentTypeCost;
     }
 
-    public int getRentTypeId() {
+    public Long getRentTypeId() {
         return RentTypeId;
     }
 
-    public void setRentTypeId(int rentTypeId) {
+    public void setRentTypeId(Long rentTypeId) {
         RentTypeId = rentTypeId;
     }
 

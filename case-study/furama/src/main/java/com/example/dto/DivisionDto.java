@@ -1,23 +1,23 @@
 package com.example.dto;
 
 
-public class Division {
-    private int divisionId;
+public class DivisionDto {
+    private Long divisionId;
     private String divisionName;
 
-    public Division() {
+    public DivisionDto() {
     }
 
-    public Division(int divisionId, String divisionName) {
+    public DivisionDto(Long divisionId, String divisionName) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;
     }
 
-    public int getDivisionId() {
+    public Long getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(int divisionId) {
+    public void setDivisionId(Long divisionId) {
         this.divisionId = divisionId;
     }
 

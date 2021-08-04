@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form action="/customer">
+                <div class="row">
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                           name="search">
+                    <button class="btn btn-outline-success col-lg-2 h-25" type="submit">Search</button>
+                </div>
+            </form>
+            <div th:if="${message}">
+                <span th:text="${message}" style="color: red;margin: 5px"></span>
+            </div>
+            <a href="/customer/create">
+                <button type="button" class="btn btn-success m-2">Create</button>
+            </a>
+            <div class="table-responsive-lg">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Id Card</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="customer,status : ${customers}">
+                        <th th:text="${status.count}"></th>
+                        <td th:text="${customer.customerCode}"></td>
+                        <td th:text="${customer.customerType.customerTypeName}"></td>
+                        <td th:text="${customer.customerName}"></td>
+                        <td th:text="${customer.customerBirthday}"></td>
+                        <td th:text="${customer.customerGender}"></td>
+                        <td th:text="${customer.customerIdCard}"></td>
+                        <td th:text="${customer.customerPhone}"></td>
+                        <td th:text="${customer.customerEmail}"></td>
+                        <td th:text="${customer.customerAddress}"></td>
+                        <td><a th:href="@{/customer/edit/__${customer.customerId}__ }">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal" th:onclick="|deleteCustomer(${customer.customerId})|">
+                                Delete
+                            </button>
+                        </td>
+                        <td><a>
+                            <button type="button" class="btn btn-warning">View</button>
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/customer(page=${customers.number - 1},search=${keyword})}"
+                       th:if="${customers.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                    </a>
+                    <span th:each="p : ${#numbers.sequence(0,customers.totalPages -1)}"
+                          th:if="${customers.hasContent()}">
+                    <a class="btn btn-outline-success"
+                       th:href="@{/customer(page=${p},search=${keyword})}" th:text="${p +1}"
+                       th:if="${(p >(customers.number)-1)&&(p <(customers.number+2))}"></a></span>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/customer(page=${customers.number + 1},search=${keyword})}"
+                       th:if="${customers.hasNext()}">
+                        <span style="font-weight: bold"> > </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<form action="/customer/delete">
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input type="hidden" id="id" name="id">
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Modal-->
+
+<footer th:replace="homePage :: footer"></footer>
+<script>
+    function deleteCustomer(id) {
+        document.getElementById('id').value = id;
+    }
+</script>
+</body>
+</html>

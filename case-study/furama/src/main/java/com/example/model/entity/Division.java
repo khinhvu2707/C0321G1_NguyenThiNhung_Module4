@@ -10,7 +10,7 @@ import java.util.Set;
 public class Division {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int divisionId;
+    private Long divisionId;
     private String divisionName;
 
     @JsonBackReference
@@ -20,16 +20,16 @@ public class Division {
     public Division() {
     }
 
-    public Division(int divisionId, String divisionName) {
+    public Division(Long divisionId, String divisionName) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;
     }
 
-    public int getDivisionId() {
+    public Long getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(int divisionId) {
+    public void setDivisionId(Long divisionId) {
         this.divisionId = divisionId;
     }
 

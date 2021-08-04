@@ -11,7 +11,7 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
+    private Long employeeId;
     private String employeeName;
     @Column(columnDefinition = "DATE")
     private String employeeBirthday;
@@ -34,7 +34,7 @@ public class Employee {
     private Division division;
     @JsonManagedReference
     @ManyToOne(targetEntity = AppUser.class)
-    @JoinColumn(name = "username",referencedColumnName = "user_name")
+    @JoinColumn(name = "User_Id")
     private AppUser appUser;
     @JsonBackReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
@@ -43,7 +43,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
+    public Employee(Long employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -59,11 +59,11 @@ public class Employee {
         this.contractSet = contractSet;
     }
 
-    public int getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 

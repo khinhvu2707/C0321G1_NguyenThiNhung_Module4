@@ -1,22 +1,22 @@
 package com.example.dto;
 
 
-public class ServiceType {
-    private int serviceTypeId;
+public class ServiceTypeDto {
+    private Long serviceTypeId;
     private String serviceTypeName;
-    public ServiceType() {
+    public ServiceTypeDto() {
     }
 
-    public ServiceType(int serviceTypeId, String serviceTypeName) {
+    public ServiceTypeDto(Long serviceTypeId, String serviceTypeName) {
         this.serviceTypeId = serviceTypeId;
         this.serviceTypeName = serviceTypeName;
     }
 
-    public int getServiceTypeId() {
+    public Long getServiceTypeId() {
         return serviceTypeId;
     }
 
-    public void setServiceTypeId(int serviceTypeId) {
+    public void setServiceTypeId(Long serviceTypeId) {
         this.serviceTypeId = serviceTypeId;
     }
 
@@ -27,6 +27,5 @@ public class ServiceType {
     public void setServiceTypeName(String serviceTypeName) {
         this.serviceTypeName = serviceTypeName;
     }
-
 
 }

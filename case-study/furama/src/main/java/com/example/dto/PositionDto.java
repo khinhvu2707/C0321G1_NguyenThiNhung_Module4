@@ -1,23 +1,23 @@
 package com.example.dto;
 
 
-public class Position {
-    private int positionId;
+public class PositionDto {
+    private Long positionId;
     private String positionName;
 
-    public Position() {
+    public PositionDto() {
     }
 
-    public Position(int positionId, String positionName) {
+    public PositionDto(Long positionId, String positionName) {
         this.positionId = positionId;
         this.positionName = positionName;
     }
 
-    public int getPositionId() {
+    public Long getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(int positionId) {
+    public void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 

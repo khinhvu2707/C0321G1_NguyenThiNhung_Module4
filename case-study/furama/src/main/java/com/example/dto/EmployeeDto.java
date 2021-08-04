@@ -1,9 +1,11 @@
 package com.example.dto;
 
+import com.example.model.entity.*;
+
 import javax.persistence.*;
 
-public class Employee {
-    private int employeeId;
+public class EmployeeDto {
+    private Long employeeId;
     private String employeeName;
     @Column(columnDefinition = "DATE")
     private String employeeBirthday;
@@ -15,12 +17,12 @@ public class Employee {
     private Position position;
     private EducationDegree educationDegree;
     private Division division;
-    private String username;
+    private AppUser appUser;
 
-    public Employee() {
+    public EmployeeDto() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, String username) {
+    public EmployeeDto(Long employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -32,14 +34,14 @@ public class Employee {
         this.position = position;
         this.educationDegree = educationDegree;
         this.division = division;
-        this.username = username;
+        this.appUser = appUser;
     }
 
-    public int getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -123,12 +125,11 @@ public class Employee {
         this.division = division;
     }
 
-    public String getUsername() {
-        return username;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
-
 }

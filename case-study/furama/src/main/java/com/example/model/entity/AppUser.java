@@ -9,16 +9,16 @@ import javax.persistence.*;
 public class AppUser {
     @Id
     @GeneratedValue
-    @Column(name = "user_Id", nullable = false)
+    @Column(name = "User_Id", nullable = false)
     private Long userId;
 
-    @Column(name = "user_Name", length = 36, nullable = false)
+    @Column(name = "User_Name", length = 36, nullable = false)
     private String userName;
 
-    @Column(name = "encryted_Password", length = 128, nullable = false)
+    @Column(name = "Encryted_Password", length = 128, nullable = false)
     private String encrytedPassword;
 
-    @Column(name = "enabled", length = 1, nullable = false)
+    @Column(name = "Enabled", length = 1, nullable = false)
     private boolean enabled;
 
     public Long getUserId() {

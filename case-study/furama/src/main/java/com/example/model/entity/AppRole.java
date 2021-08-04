@@ -9,10 +9,10 @@ import javax.persistence.*;
 public class AppRole {
     @Id
     @GeneratedValue
-    @Column(name = "role_Id", nullable = false)
+    @Column(name = "Role_Id", nullable = false)
     private Long roleId;
 
-    @Column(name = "role_Name", length = 30, nullable = false)
+    @Column(name = "Role_Name", length = 30, nullable = false)
     private String roleName;
 
     public Long getRoleId() {

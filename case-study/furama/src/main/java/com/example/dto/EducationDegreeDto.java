@@ -1,22 +1,22 @@
 package com.example.dto;
 
-public class EducationDegree {
-    private int educationDegreeId;
+public class EducationDegreeDto {
+    private Long educationDegreeId;
     private String educationDegreeName;
 
-    public EducationDegree(int educationDegreeId, String educationDegreeName) {
+    public EducationDegreeDto(Long educationDegreeId, String educationDegreeName) {
         this.educationDegreeId = educationDegreeId;
         this.educationDegreeName = educationDegreeName;
     }
 
-    public EducationDegree() {
+    public EducationDegreeDto() {
     }
 
-    public int getEducationDegreeId() {
+    public Long getEducationDegreeId() {
         return educationDegreeId;
     }
 
-    public void setEducationDegreeId(int educationDegreeId) {
+    public void setEducationDegreeId(Long educationDegreeId) {
         this.educationDegreeId = educationDegreeId;
     }
 

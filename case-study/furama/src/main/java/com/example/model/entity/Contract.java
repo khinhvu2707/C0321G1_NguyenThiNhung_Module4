@@ -11,7 +11,7 @@ import java.util.Set;
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contractId;
+    private Long contractId;
     @Column(columnDefinition = "DATE")
     private String contractStartDate;
     @Column(columnDefinition = "DATE")
@@ -38,7 +38,7 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Service service, Set<ContractDetail> contractDetailSet) {
+    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Service service, Set<ContractDetail> contractDetailSet) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
@@ -50,11 +50,11 @@ public class Contract {
         this.contractDetailSet = contractDetailSet;
     }
 
-    public int getContractId() {
+    public Long getContractId() {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
+    public void setContractId(Long contractId) {
         this.contractId = contractId;
     }
 

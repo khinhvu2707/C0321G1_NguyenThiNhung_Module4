@@ -1,34 +1,34 @@
 package com.example.dto;
 
-public class Contract {
-    private int contractId;
+public class ContractDto {
+    private Long contractId;
     private String contractStartDate;
     private String contractEndDate;
     private double contractDeposit;
     private double contractTotalMoney;
-    private Employee employee;
-    private Customer customer;
-    private Service service;
+    private EmployeeDto employee;
+    private CustomerDto customerDto;
+    private ServiceDto service;
 
-    public Contract() {
+    public ContractDto() {
     }
 
-    public Contract(int contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Service service) {
+    public ContractDto(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, EmployeeDto employee, CustomerDto customerDto, ServiceDto service) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
         this.contractTotalMoney = contractTotalMoney;
         this.employee = employee;
-        this.customer = customer;
+        this.customerDto = customerDto;
         this.service = service;
     }
 
-    public int getContractId() {
+    public Long getContractId() {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
+    public void setContractId(Long contractId) {
         this.contractId = contractId;
     }
 
@@ -64,27 +64,27 @@ public class Contract {
         this.contractTotalMoney = contractTotalMoney;
     }
 
-    public Employee getEmployee() {
+    public EmployeeDto getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeDto employee) {
         this.employee = employee;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public CustomerDto getCustomerDto() {
+        return customerDto;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerDto(CustomerDto customerDto) {
+        this.customerDto = customerDto;
     }
 
-    public Service getService() {
+    public ServiceDto getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceDto service) {
         this.service = service;
     }
 

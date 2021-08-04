@@ -11,7 +11,7 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private Long customerId;
     private String customerCode;
     @JsonManagedReference
     @ManyToOne(targetEntity = CustomerType.class)
@@ -33,7 +33,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, Set<Contract> contractSet) {
+    public Customer(Long customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, Set<Contract> contractSet) {
         this.customerId = customerId;
         this.customerCode = customerCode;
         this.customerType = customerType;
@@ -47,11 +47,11 @@ public class Customer {
         this.contractSet = contractSet;
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

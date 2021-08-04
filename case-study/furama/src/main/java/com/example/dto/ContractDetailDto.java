@@ -1,43 +1,43 @@
 package com.example.dto;
 
 
-public class ContractDetail {
-    private int contractDetailId;
-    private Contract contract;
-    private AttachService attachService;
+public class ContractDetailDto {
+    private Long contractDetailId;
+    private ContractDto contract;
+    private AttachServiceDto attachService;
     private int quantity;
 
-    public ContractDetail() {
+    public ContractDetailDto() {
     }
 
-    public ContractDetail(int contractDetailId, Contract contract, AttachService attachService, int quantity) {
+    public ContractDetailDto(Long contractDetailId, ContractDto contract, AttachServiceDto attachService, int quantity) {
         this.contractDetailId = contractDetailId;
         this.contract = contract;
         this.attachService = attachService;
         this.quantity = quantity;
     }
 
-    public int getContractDetailId() {
+    public Long getContractDetailId() {
         return contractDetailId;
     }
 
-    public void setContractDetailId(int contractDetailId) {
+    public void setContractDetailId(Long contractDetailId) {
         this.contractDetailId = contractDetailId;
     }
 
-    public Contract getContract() {
+    public ContractDto getContract() {
         return contract;
     }
 
-    public void setContract(Contract contract) {
+    public void setContract(ContractDto contract) {
         this.contract = contract;
     }
 
-    public AttachService getAttachService() {
+    public AttachServiceDto getAttachService() {
         return attachService;
     }
 
-    public void setAttachService(AttachService attachService) {
+    public void setAttachService(AttachServiceDto attachService) {
         this.attachService = attachService;
     }
 

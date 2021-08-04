@@ -8,13 +8,13 @@ import java.util.Set;
 public class EducationDegree {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int educationDegreeId;
+    private Long educationDegreeId;
     private String educationDegreeName;
 
     @OneToMany(mappedBy = "educationDegree",cascade = CascadeType.ALL)
     private Set<Employee> employeeSet;
 
-    public EducationDegree(int educationDegreeId, String educationDegreeName) {
+    public EducationDegree(Long educationDegreeId, String educationDegreeName) {
         this.educationDegreeId = educationDegreeId;
         this.educationDegreeName = educationDegreeName;
     }
@@ -22,11 +22,11 @@ public class EducationDegree {
     public EducationDegree() {
     }
 
-    public int getEducationDegreeId() {
+    public Long getEducationDegreeId() {
         return educationDegreeId;
     }
 
-    public void setEducationDegreeId(int educationDegreeId) {
+    public void setEducationDegreeId(Long educationDegreeId) {
         this.educationDegreeId = educationDegreeId;
     }
 

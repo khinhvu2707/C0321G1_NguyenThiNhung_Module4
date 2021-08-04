@@ -11,7 +11,7 @@ import java.util.Set;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceId;
+    private Long serviceId;
     private String serviceCode;
     private String serviceName;
     private int serviceArea;
@@ -36,7 +36,7 @@ public class Service {
     public Service() {
     }
 
-    public Service(int serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
+    public Service(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
@@ -52,11 +52,11 @@ public class Service {
         this.contractSet = contractSet;
     }
 
-    public int getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 

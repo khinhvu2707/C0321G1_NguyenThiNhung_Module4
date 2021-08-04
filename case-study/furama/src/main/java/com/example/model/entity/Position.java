@@ -10,7 +10,7 @@ import java.util.Set;
 public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int positionId;
+    private Long positionId;
     private String positionName;
     @JsonBackReference
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
@@ -19,16 +19,16 @@ public class Position {
     public Position() {
     }
 
-    public Position(int positionId, String positionName) {
+    public Position(Long positionId, String positionName) {
         this.positionId = positionId;
         this.positionName = positionName;
     }
 
-    public int getPositionId() {
+    public Long getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(int positionId) {
+    public void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 

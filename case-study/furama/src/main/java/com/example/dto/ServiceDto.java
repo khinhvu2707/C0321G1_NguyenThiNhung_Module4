@@ -1,24 +1,24 @@
 package com.example.dto;
 
 
-public class Service {
-    private int serviceId;
+public class ServiceDto {
+    private Long serviceId;
     private String serviceCode;
     private String serviceName;
     private int serviceArea;
     private double serviceCost;
     private int serviceMaxPeople;
-    private RentType rentType;
-    private ServiceType serviceType;
+    private RentTypeDto rentType;
+    private ServiceTypeDto serviceType;
     private String standardRoom;
     private String descriptionOtherConvenience;
     private double poolArea;
     private int numberOfFloor;
 
-    public Service() {
+    public ServiceDto() {
     }
 
-    public Service(int serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor) {
+    public ServiceDto(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentTypeDto rentType, ServiceTypeDto serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
@@ -33,11 +33,11 @@ public class Service {
         this.numberOfFloor = numberOfFloor;
     }
 
-    public int getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 
@@ -81,19 +81,19 @@ public class Service {
         this.serviceMaxPeople = serviceMaxPeople;
     }
 
-    public RentType getRentType() {
+    public RentTypeDto getRentType() {
         return rentType;
     }
 
-    public void setRentType(RentType rentType) {
+    public void setRentType(RentTypeDto rentType) {
         this.rentType = rentType;
     }
 
-    public ServiceType getServiceType() {
+    public ServiceTypeDto getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(ServiceType serviceType) {
+    public void setServiceType(ServiceTypeDto serviceType) {
         this.serviceType = serviceType;
     }
 

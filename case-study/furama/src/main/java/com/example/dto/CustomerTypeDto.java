@@ -1,23 +1,23 @@
 package com.example.dto;
 
 
-public class CustomerType {
-    private int customerTypeId;
+public class CustomerTypeDto {
+    private Long customerTypeId;
     private String customerTypeName;
 
-    public CustomerType() {
+    public CustomerTypeDto() {
     }
 
-    public CustomerType(int customerTypeId, String customerTypeName) {
+    public CustomerTypeDto(Long customerTypeId, String customerTypeName) {
         this.customerTypeId = customerTypeId;
         this.customerTypeName = customerTypeName;
     }
 
-    public int getCustomerTypeId() {
+    public Long getCustomerTypeId() {
         return customerTypeId;
     }
 
-    public void setCustomerTypeId(int customerTypeId) {
+    public void setCustomerTypeId(Long customerTypeId) {
         this.customerTypeId = customerTypeId;
     }
 

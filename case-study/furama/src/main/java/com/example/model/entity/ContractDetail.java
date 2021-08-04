@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contractDetailId;
+    private Long contractDetailId;
     @JsonManagedReference
     @ManyToOne(targetEntity = Contract.class)
     @JoinColumn(name = "contract_id",referencedColumnName = "contractId")
@@ -23,18 +23,18 @@ public class ContractDetail {
     public ContractDetail() {
     }
 
-    public ContractDetail(int contractDetailId, Contract contract, AttachService attachService, int quantity) {
+    public ContractDetail(Long contractDetailId, Contract contract, AttachService attachService, int quantity) {
         this.contractDetailId = contractDetailId;
         this.contract = contract;
         this.attachService = attachService;
         this.quantity = quantity;
     }
 
-    public int getContractDetailId() {
+    public Long getContractDetailId() {
         return contractDetailId;
     }
 
-    public void setContractDetailId(int contractDetailId) {
+    public void setContractDetailId(Long contractDetailId) {
         this.contractDetailId = contractDetailId;
     }
 

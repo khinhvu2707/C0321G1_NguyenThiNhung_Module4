@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form action="/customer">
+                <div class="row">
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                           name="search">
+                    <button class="btn btn-outline-success col-lg-2 my-1" type="submit">Search</button>
+                </div>
+            </form>
+            <div th:if="${message}">
+                <span th:text="${message}" style="color: red;margin: 5px"></span>
+            </div>
+            <a href="/customer/create">
+                <button type="button" class="btn btn-success m-2">Create</button>
+            </a>
+            <div class="table-responsive-lg">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Id Card</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Education Degree</th>
+                        <th scope="col">Division</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="employee,status : ${employees}">
+                        <th th:text="${status.count}"></th>
+                        <td th:text="${employee.employeeName}"></td>
+                        <td th:text="${employee.employeeBirthday}"></td>
+                        <td th:text="${employee.employeeIdCard}"></td>
+                        <td th:text="${employee.employeeSalary}"></td>
+                        <td th:text="${employee.employeePhone}"></td>
+                        <td th:text="${employee.employeeEmail}"></td>
+                        <td th:text="${employee.employeeAddress}"></td>
+                        <td th:text="${employee.position.positionName}"></td>
+                        <td th:text="${employee.educationDegree.educationDegreeName}"></td>
+                        <td th:text="${employee.division.divisionName}"></td>
+                        <td><a>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal" th:onclick="|deleteEmployee(${employee.employeeId})|">
+                                Delete
+                            </button>
+                        </td>
+                        <td><a>
+                            <button type="button" class="btn btn-warning">View</button>
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/employee(page=${employees.number - 1},search=${keyword})}"
+                       th:if="${employees.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                    </a>
+                    <span th:each="p : ${#numbers.sequence(0,employees.totalPages -1)}"
+                          th:if="${employees.hasContent()}">
+                    <a class="btn btn-outline-success"
+                       th:href="@{/employee(page=${p},search=${keyword})}" th:text="${p +1}"
+                       th:if="${(p >(employees.number)-1)&&(p <(employees.number+2))}"></a></span>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/employee(page=${employees.number + 1},search=${keyword})}"
+                       th:if="${employees.hasNext()}">
+                        <span style="font-weight: bold"> > </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<form action="/customer/delete">
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input type="hidden" id="id" name="id">
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Modal-->
+
+<footer th:replace="homePage :: footer"></footer>
+<script>
+    function deleteEmployee(id) {
+        document.getElementById('id').value = id;
+    }
+</script>
+</body>
+</html>

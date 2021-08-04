@@ -10,7 +10,7 @@ import java.util.Set;
 public class ServiceType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceTypeId;
+    private Long serviceTypeId;
     private String serviceTypeName;
 
     @JsonBackReference
@@ -19,16 +19,16 @@ public class ServiceType {
     public ServiceType() {
     }
 
-    public ServiceType(int serviceTypeId, String serviceTypeName) {
+    public ServiceType(Long serviceTypeId, String serviceTypeName) {
         this.serviceTypeId = serviceTypeId;
         this.serviceTypeName = serviceTypeName;
     }
 
-    public int getServiceTypeId() {
+    public Long getServiceTypeId() {
         return serviceTypeId;
     }
 
-    public void setServiceTypeId(int serviceTypeId) {
+    public void setServiceTypeId(Long serviceTypeId) {
         this.serviceTypeId = serviceTypeId;
     }
 

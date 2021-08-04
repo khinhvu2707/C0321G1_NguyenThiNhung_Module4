@@ -1,4 +1,13 @@
 package com.example.model.repository.employee;
 
-public interface IEmployeeRepository {
+import com.example.model.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface IEmployeeRepository extends JpaRepository<Employee, Long> {
+    Employee findByEmployeeId(Long id);
+
+    Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name);
 }
