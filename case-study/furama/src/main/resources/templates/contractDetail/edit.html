@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form th:action="@{/contractDetail/edit}" th:object="${contractDetailDto}" method="post">
+                <input th:type="hidden" name="id" th:field="*{contractDetailId}">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Please enter the information below !</h4>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Contract:</td>
+                                <td>
+                                    <select th:field="*{contract}">
+                                        <option th:each="c : ${contractList}" th:value="${c.contractId}"
+                                                th:text="${c.contractId}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Attach Service:</td>
+                                <td>
+                                    <select th:field="*{attachService}">
+                                        <option th:each="c : ${attachServiceList}" th:value="${c.attachServiceId}"
+                                                th:text="${c.attachServiceName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quantity:</td>
+                                <td><input type="text" th:field="*{quantity}"/></td>
+                                <td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Error</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="submit" class="btn btn-warning m-2">Edit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form th:action="@{/contract/edit}" th:object="${contractDto}" method="post">
+                <input th:type="hidden" name="id" th:field="*{contractId}">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Please enter the information below !</h4>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Start date:</td>
+                                <td><input type="date" th:field="*{contractStartDate}" readonly></td>
+                                <td th:if="${#fields.hasErrors('contractStartDate')}" th:errors="*{contractStartDate}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>End date:</td>
+                                <td><input type="date" th:field="*{contractEndDate}"/></td>
+                                <td th:if="${#fields.hasErrors('contractEndDate')}" th:errors="*{contractEndDate}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Deposit:</td>
+                                <td><input type="text" th:field="*{contractDeposit}"/></td>
+                                <td th:if="${#fields.hasErrors('contractDeposit')}" th:errors="*{contractDeposit}">
+                                    Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total Money:</td>
+                                <td><input type="text" th:field="*{contractTotalMoney}"/></td>
+                                <td th:if="${#fields.hasErrors('contractTotalMoney')}" th:errors="*{contractTotalMoney}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Employee:</td>
+                                <td>
+                                    <select th:field="*{employee}">
+                                        <option th:each="c : ${employeeList}" th:value="${c.employeeId}"
+                                                th:text="${c.employeeName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer:</td>
+                                <td>
+                                    <select th:field="*{customer}">
+                                        <option th:each="c : ${customerList}" th:value="${c.customerId}"
+                                                th:text="${c.customerName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Type:</td>
+                                <td>
+                                    <select th:field="*{services}">
+                                        <option th:each="c : ${serviceList}" th:value="${c.serviceId}"
+                                                th:text="${c.serviceName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="submit" class="btn btn-warning m-2">Edit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

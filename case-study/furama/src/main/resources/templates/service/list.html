@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form action="/services">
+                <div class="row">
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                           name="search">
+                    <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
+                </div>
+            </form>
+            <div th:if="${message}">
+                <span th:text="${message}" style="color: red;margin: 5px"></span>
+            </div>
+            <a href="/services/create">
+                <button type="button" class="btn btn-success m-2">Create</button>
+            </a>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Area</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Max People</th>
+                        <th scope="col">Rent Type</th>
+                        <th scope="col">Service Type</th>
+                        <th scope="col">Standard Room</th>
+                        <th scope="col">Description Other Convenience</th>
+                        <th scope="col">Pool Area</th>
+                        <th scope="col">Number Of Floor</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="service,status : ${services}">
+                        <th th:text="${status.count}"></th>
+                        <td th:text="${service.serviceCode}"></td>
+                        <td th:text="${service.serviceName}"></td>
+                        <td th:text="${service.serviceArea}"></td>
+                        <td th:text="${service.serviceCost}"></td>
+                        <td th:text="${service.serviceMaxPeople}"></td>
+                        <td th:text="${service.rentType.rentTypeName}"></td>
+                        <td th:text="${service.serviceType.serviceTypeName}"></td>
+                        <td th:text="${service.standardRoom}"></td>
+                        <td th:text="${service.descriptionOtherConvenience}"></td>
+                        <td th:text="${service.poolArea}"></td>
+                        <td th:text="${service.numberOfFloor}"></td>
+                        <td><a th:href="@{/services/edit/__${service.serviceId}__ }">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal" th:onclick="|deleteService(${service.serviceId})|">
+                                Delete
+                            </button>
+                        </td>
+                        <td><a th:href="@{/services/view/__${service.serviceId}__ }">
+                            <button type="button" class="btn btn-warning" >View</button>
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/services(page=${services.number - 1},search=${keyword})}"
+                       th:if="${services.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                    </a>
+                    <span th:each="p : ${#numbers.sequence(0,services.totalPages -1)}"
+                          th:if="${services.hasContent()}">
+                    <a class="btn btn-outline-success"
+                       th:href="@{/services(page=${p},search=${keyword})}" th:text="${p +1}"
+                       th:if="${(p >(services.number)-1)&&(p <(services.number+2))}"></a></span>
+                    <a class="btn btn-outline-success"
+                       th:href="@{/services(page=${services.number + 1},search=${keyword})}"
+                       th:if="${services.hasNext()}">
+                        <span style="font-weight: bold"> > </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<form action="/services/delete">
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input type="hidden" id="id" name="id">
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Modal-->
+<script>
+    function deleteService(id) {
+        document.getElementById('id').value = id;
+    }
+</script>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

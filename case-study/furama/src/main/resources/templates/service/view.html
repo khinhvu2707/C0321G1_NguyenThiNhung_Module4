@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Information :</h4>
+                <div>
+                    <table>
+                        <tr>
+                            <td>Service Code: </td>
+                            <td th:text="${service.serviceCode}"></td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td th:text="${service.serviceName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Service Area:</td>
+                            <td th:text="${service.serviceArea}"></td>
+                        </tr>
+                        <tr>
+                            <td>Cost:</td>
+                            <td th:text="${service.serviceCost}"></td>
+                        </tr>
+                        <tr>
+                            <td>Max People:</td>
+                            <td th:text="${service.serviceMaxPeople}"></td>
+                        </tr>
+                        <tr>
+                            <td>Rent Type:</td>
+                            <td th:text="${service.rentType.rentTypeName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Service Type:</td>
+                            <td th:text="${service.serviceType.serviceTypeName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Standard Room:</td>
+                            <td th:text="${service.standardRoom}"></td>
+                        </tr>
+                        <tr>
+                            <td>Description Other Convenience:</td>
+                            <td th:text="${service.descriptionOtherConvenience}"></td>
+                        </tr>
+                        <tr>
+                            <td>Pool Area:</td>
+                            <td th:text="${service.poolArea}"></td>
+                        </tr>
+                        <tr>
+                            <td>Number Of Floor:</td>
+                            <td th:text="${service.numberOfFloor}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <p class="mb-0">
+                    <a href="/services"><button type="button" class="btn btn-warning m-2">Back to List Service</button></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

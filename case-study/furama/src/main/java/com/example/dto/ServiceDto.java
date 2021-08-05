@@ -1,24 +1,45 @@
 package com.example.dto;
 
 
+import com.example.model.entity.RentType;
+import com.example.model.entity.ServiceType;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class ServiceDto {
     private Long serviceId;
+    @NotBlank(message = "Mã dịch vụ không được để trống!")
+    @Pattern(regexp = "^DV-\\d{4}$", message = "Mã dịch vụ phải đúng định dạng DV-xxxx")
     private String serviceCode;
+    @NotBlank(message = "Tên không được để trống!")
     private String serviceName;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private int serviceArea;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private double serviceCost;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private int serviceMaxPeople;
-    private RentTypeDto rentType;
-    private ServiceTypeDto serviceType;
+    private RentType rentType;
+    private ServiceType serviceType;
     private String standardRoom;
     private String descriptionOtherConvenience;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private double poolArea;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private int numberOfFloor;
 
     public ServiceDto() {
     }
 
-    public ServiceDto(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentTypeDto rentType, ServiceTypeDto serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor) {
+    public ServiceDto(Long serviceId, @NotBlank(message = "Mã dịch vụ không được để trống!") @Pattern(regexp = "^DV-\\d{4}$", message = "Mã dịch vụ phải đúng định dạng DV-xxxx") String serviceCode, @NotBlank(message = "Tên không được để trống!") String serviceName, @NotNull(message = "Không được để trống") @Min(0) int serviceArea, @NotNull(message = "Không được để trống") @Min(0) double serviceCost, @NotNull(message = "Không được để trống") @Min(0) int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, @NotNull(message = "Không được để trống") @Min(0) double poolArea, @NotNull(message = "Không được để trống") @Min(0) int numberOfFloor) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
@@ -81,19 +102,19 @@ public class ServiceDto {
         this.serviceMaxPeople = serviceMaxPeople;
     }
 
-    public RentTypeDto getRentType() {
+    public RentType getRentType() {
         return rentType;
     }
 
-    public void setRentType(RentTypeDto rentType) {
+    public void setRentType(RentType rentType) {
         this.rentType = rentType;
     }
 
-    public ServiceTypeDto getServiceType() {
+    public ServiceType getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(ServiceTypeDto serviceType) {
+    public void setServiceType(ServiceType serviceType) {
         this.serviceType = serviceType;
     }
 

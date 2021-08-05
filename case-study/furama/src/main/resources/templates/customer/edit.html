@@ -5,94 +5,91 @@
     <title>List</title>
 </head>
 <body>
-<!--<header th:fragment="edit-header">-->
-    <p th:replace="homePage :: header"></p>
-    <div th:replace="homePage :: nav"></div>
-    <div class="container-fluid bg-light border ">
-        <div class="row">
-            <div class="col-lg-2 border-right">
-                <ul th:replace="homePage :: left"></ul>
-            </div>
-            <div class="col-lg-10 pt-3 pb-3">
-                <form th:action="@{/customer/edit}" th:object="${customerDto}" method="post">
-                    <input th:type="hidden" name="id" th:field="*{customerId}">
-                    <div class="alert alert-info" role="alert">
-                        <h4 class="alert-heading">Please enter the information below !</h4>
-                        <div>
-                            <table>
-                                <tr>
-                                    <td>Customer Code:</td>
-                                    <td><input type="text" th:field="*{customerCode}" readonly></td>
-                                    <td th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}">Error</td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Type:</td>
-                                    <td>
-                                        <select th:field="*{customerType}">
-                                            <option th:each="c : ${customerTypeList}" th:value="${c.customerTypeId}"
-                                                    th:text="${c.customerTypeName}"></option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Name:</td>
-                                    <td><input type="text" th:field="*{customerName}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}">Error</td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Birthday:</td>
-                                    <td><input type="date" th:field="*{customerBirthday}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}">
-                                        Error
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Gender:</td>
-                                    <td><input type="text" th:field="*{customerGender}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerGender')}" th:errors="*{customerGender}">Error
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Id Card:</td>
-                                    <td><input type="text" th:field="*{customerIdCard}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}">Error
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Phone:</td>
-                                    <td><input type="text" th:field="*{customerPhone}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}">Error
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Email:</td>
-                                    <td><input type="text" th:field="*{customerEmail}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}">Error
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Address:</td>
-                                    <td><input type="text" th:field="*{customerAddress}"/></td>
-                                    <td th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}">
-                                        Error
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <hr>
-                        <p class="mb-0">
-                            <button type="submit" class="btn btn-warning m-2">Edit</button>
-                        </p>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form th:action="@{/customer/edit}" th:object="${customerDto}" method="post">
+                <input th:type="hidden" name="id" th:field="*{customerId}">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Please enter the information below !</h4>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Customer Code:</td>
+                                <td><input type="text" th:field="*{customerCode}" readonly></td>
+                                <td th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Type:</td>
+                                <td>
+                                    <select th:field="*{customerType}">
+                                        <option th:each="c : ${customerTypeList}" th:value="${c.customerTypeId}"
+                                                th:text="${c.customerTypeName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name:</td>
+                                <td><input type="text" th:field="*{customerName}"/></td>
+                                <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Birthday:</td>
+                                <td><input type="date" th:field="*{customerBirthday}"/></td>
+                                <td th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}">
+                                    Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Gender:</td>
+                                <td><select th:field="*{customerGender}">
+                                    <option th:value="0" th:text="Male"></option>
+                                    <option th:value="1" th:text="Female"></option>
+                                </select></td>
+                                <td th:if="${#fields.hasErrors('customerGender')}" th:errors="*{customerGender}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Id Card:</td>
+                                <td><input type="text" th:field="*{customerIdCard}"/></td>
+                                <td th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Phone:</td>
+                                <td><input type="text" th:field="*{customerPhone}"/></td>
+                                <td th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Email:</td>
+                                <td><input type="text" th:field="*{customerEmail}"/></td>
+                                <td th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Address:</td>
+                                <td><input type="text" th:field="*{customerAddress}"/></td>
+                                <td th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}">
+                                    Error
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                </form>
-            </div>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="submit" class="btn btn-warning m-2">Edit</button>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
-    <p class="bg-light text-center text-dark h-25" th:fragment="footer">
-        <div class="text-center p-3" style="background-color: seagreen">
-            <p style="color: snow">Thanks you very much ! Best wish for you !</p>
-        </div>
-    </p>
-<!--</div>-->
+</div>
+<footer th:replace="homePage :: footer"></footer>
 </body>
 </html>

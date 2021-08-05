@@ -15,7 +15,7 @@ public class Employee {
     private String employeeName;
     @Column(columnDefinition = "DATE")
     private String employeeBirthday;
-    private int employeeIdCard;
+    private String employeeIdCard;
     private double employeeSalary;
     private String employeePhone;
     private String employeeEmail;
@@ -43,7 +43,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, String employeeName, String employeeBirthday, int employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
+    public Employee(Long employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -57,6 +57,20 @@ public class Employee {
         this.division = division;
         this.appUser = appUser;
         this.contractSet = contractSet;
+    }
+
+    public Employee(Long employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.employeeBirthday = employeeBirthday;
+        this.employeeIdCard = employeeIdCard;
+        this.employeeSalary = employeeSalary;
+        this.employeePhone = employeePhone;
+        this.employeeEmail = employeeEmail;
+        this.employeeAddress = employeeAddress;
+        this.position = position;
+        this.educationDegree = educationDegree;
+        this.division = division;
     }
 
     public Long getEmployeeId() {
@@ -83,11 +97,11 @@ public class Employee {
         this.employeeBirthday = employeeBirthday;
     }
 
-    public int getEmployeeIdCard() {
+    public String getEmployeeIdCard() {
         return employeeIdCard;
     }
 
-    public void setEmployeeIdCard(int employeeIdCard) {
+    public void setEmployeeIdCard(String employeeIdCard) {
         this.employeeIdCard = employeeIdCard;
     }
 

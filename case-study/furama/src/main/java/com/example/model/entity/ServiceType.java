@@ -15,7 +15,7 @@ public class ServiceType {
 
     @JsonBackReference
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
-    private Set<Service> serviceSet;
+    private Set<Services> servicesSet;
     public ServiceType() {
     }
 

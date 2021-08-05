@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "service")
-public class Service {
+public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceId;
@@ -30,13 +30,13 @@ public class Service {
     private double poolArea;
     private int numberOfFloor;
     @JsonBackReference
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "services", cascade = CascadeType.ALL)
     private Set<Contract> contractSet;
 
-    public Service() {
+    public Services() {
     }
 
-    public Service(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
+    public Services(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;

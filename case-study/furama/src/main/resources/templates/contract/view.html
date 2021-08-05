@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Information :</h4>
+                <div>
+                    <table>
+                        <tr>
+                            <td>Contract Start Date :</td>
+                            <td th:text="${contract.contractStartDate}"></td>
+                        </tr>
+                        <tr>
+                            <td>End Date:</td>
+                            <td th:text="${contract.contractEndDate}"></td>
+                        </tr>
+                        <tr>
+                            <td>Deposit:</td>
+                            <td th:text="${contract.contractDeposit}"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Money:</td>
+                            <td th:text="${contract.contractTotalMoney}"></td>
+                        </tr>
+                        <tr>
+                            <td>Employee:</td>
+                            <td th:text="${contract.employee.employeeName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer:</td>
+                            <td th:text="${contract.customer.customerName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Service:</td>
+                            <td th:text="${contract.services.serviceName}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <p class="mb-0">
+                    <a href="/contract"><button type="button" class="btn btn-warning m-2">Back to List Contract</button></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

@@ -27,9 +27,9 @@ public class Contract {
     @JoinColumn(name = "customer_id",referencedColumnName = "customerId")
     private Customer customer;
     @JsonManagedReference
-    @ManyToOne(targetEntity = Service.class)
+    @ManyToOne(targetEntity = Services.class)
     @JoinColumn(name = "service_id",referencedColumnName = "serviceId")
-    private Service service;
+    private Services services;
 
     @JsonBackReference
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Service service, Set<ContractDetail> contractDetailSet) {
+    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, Set<ContractDetail> contractDetailSet) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
@@ -46,7 +46,7 @@ public class Contract {
         this.contractTotalMoney = contractTotalMoney;
         this.employee = employee;
         this.customer = customer;
-        this.service = service;
+        this.services = services;
         this.contractDetailSet = contractDetailSet;
     }
 
@@ -106,12 +106,12 @@ public class Contract {
         this.customer = customer;
     }
 
-    public Service getService() {
-        return service;
+    public Services getServices() {
+        return services;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setServices(Services services) {
+        this.services = services;
     }
 
     public Set<ContractDetail> getContractDetailSet() {

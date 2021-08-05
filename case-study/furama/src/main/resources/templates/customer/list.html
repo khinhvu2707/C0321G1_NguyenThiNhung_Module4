@@ -17,7 +17,7 @@
                 <div class="row">
                     <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
                            name="search">
-                    <button class="btn btn-outline-success col-lg-2 h-25" type="submit">Search</button>
+                    <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
                 </div>
             </form>
             <div th:if="${message}">
@@ -26,7 +26,7 @@
             <a href="/customer/create">
                 <button type="button" class="btn btn-success m-2">Create</button>
             </a>
-            <div class="table-responsive-lg">
+            <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="table-success">
@@ -52,7 +52,8 @@
                         <td th:text="${customer.customerType.customerTypeName}"></td>
                         <td th:text="${customer.customerName}"></td>
                         <td th:text="${customer.customerBirthday}"></td>
-                        <td th:text="${customer.customerGender}"></td>
+                        <td th:if="${customer.customerGender==1}" th:text="Male"></td>
+                        <td th:if="${customer.customerGender==0}" th:text="Female"></td>
                         <td th:text="${customer.customerIdCard}"></td>
                         <td th:text="${customer.customerPhone}"></td>
                         <td th:text="${customer.customerEmail}"></td>
@@ -66,8 +67,8 @@
                                 Delete
                             </button>
                         </td>
-                        <td><a>
-                            <button type="button" class="btn btn-warning">View</button>
+                        <td><a th:href="@{/customer/view/__${customer.customerId}__ }">
+                            <button type="button" class="btn btn-warning" >View</button>
                         </a></td>
                     </tr>
                     </tbody>
@@ -119,12 +120,11 @@
     </div>
 </form>
 <!--Modal-->
-
-<footer th:replace="homePage :: footer"></footer>
 <script>
     function deleteCustomer(id) {
         document.getElementById('id').value = id;
     }
 </script>
+<footer th:replace="homePage :: footer"></footer>
 </body>
 </html>

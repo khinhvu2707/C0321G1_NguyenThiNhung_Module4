@@ -1,27 +1,41 @@
 package com.example.dto;
 
+import com.example.model.entity.Customer;
+import com.example.model.entity.Employee;
+import com.example.model.entity.Services;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ContractDto {
     private Long contractId;
+    @NotBlank(message = "Không được để trống")
     private String contractStartDate;
+    @NotBlank(message = "Không được để trống")
     private String contractEndDate;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private double contractDeposit;
+    @NotNull(message = "Không được để trống")
+    @Min(0)
     private double contractTotalMoney;
-    private EmployeeDto employee;
-    private CustomerDto customerDto;
-    private ServiceDto service;
+    private Employee employee;
+    private Customer customer;
+    private Services services;
 
     public ContractDto() {
     }
 
-    public ContractDto(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, EmployeeDto employee, CustomerDto customerDto, ServiceDto service) {
+    public ContractDto(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
         this.contractTotalMoney = contractTotalMoney;
         this.employee = employee;
-        this.customerDto = customerDto;
-        this.service = service;
+        this.customer = customer;
+        this.services = services;
     }
 
     public Long getContractId() {
@@ -64,28 +78,28 @@ public class ContractDto {
         this.contractTotalMoney = contractTotalMoney;
     }
 
-    public EmployeeDto getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(EmployeeDto employee) {
+    public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
-    public CustomerDto getCustomerDto() {
-        return customerDto;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerDto(CustomerDto customerDto) {
-        this.customerDto = customerDto;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public ServiceDto getService() {
-        return service;
+    public Services getServices() {
+        return services;
     }
 
-    public void setService(ServiceDto service) {
-        this.service = service;
+    public void setServices(Services services) {
+        this.services = services;
     }
 
 }

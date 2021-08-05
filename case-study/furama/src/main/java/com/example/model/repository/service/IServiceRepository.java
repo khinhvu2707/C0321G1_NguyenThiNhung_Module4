@@ -1,14 +1,16 @@
 package com.example.model.repository.service;
 
-import com.example.model.entity.Contract;
-import com.example.model.entity.Service;
+import com.example.model.entity.Services;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.awt.print.Pageable;
+import java.util.List;
 
-public interface IServiceRepository  extends JpaRepository<Service,Long> {
-    Service findByServiceId(Long id);
+public interface IServiceRepository  extends JpaRepository<Services,Long> {
+    Services findByServiceId(Long id);
 
-    Page<Service> findAll(Pageable pageable);
+    Page<Services> findAllByServiceNameContaining(Pageable pageable, String name);
+
+    List<Services> findAll();
 }

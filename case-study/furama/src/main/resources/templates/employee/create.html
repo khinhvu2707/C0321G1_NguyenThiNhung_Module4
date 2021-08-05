@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form th:action="@{/employee/create}" th:object="${employeeDto}" method="post">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Please enter the information below !</h4>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Employee Name:</td>
+                                <td><input type="text" th:field="*{employeeName}"></td>
+                                <td th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Birthday:</td>
+                                <td><input type="date" th:field="*{employeeBirthday}"></td>
+                                <td th:if="${#fields.hasErrors('employeeBirthday')}" th:errors="*{employeeBirthday}">Error</td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Id Card:</td>
+                                <td><input type="text" th:field="*{employeeIdCard}"/></td>
+                                <td th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Salary:</td>
+                                <td><input type="text" th:field="*{employeeSalary}"/></td>
+                                <td th:if="${#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td><input type="text" th:field="*{employeePhone}"/></td>
+                                <td th:if="${#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}">Error</td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input type="text" th:field="*{employeeEmail}"/></td>
+                                <td th:if="${#fields.hasErrors('employeeEmail')}" th:errors="*{employeeEmail}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td><input type="text" th:field="*{employeeAddress}"/></td>
+                                <td th:if="${#fields.hasErrors('employeeAddress')}" th:errors="*{employeeAddress}">Error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Position:</td>
+                                <td>
+                                    <select th:field="*{position}">
+                                        <option th:each="c : ${positionList}" th:value="${c.positionId}"
+                                                th:text="${c.positionName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>EducationDegree:</td>
+                                <td>
+                                    <select th:field="*{educationDegree}">
+                                        <option th:each="c : ${educationDegreeList}" th:value="${c.educationDegreeId}"
+                                                th:text="${c.educationDegreeName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Division:</td>
+                                <td>
+                                    <select th:field="*{division}">
+                                        <option th:each="c : ${divisionList}" th:value="${c.divisionId}"
+                                                th:text="${c.divisionName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+<!--                            <tr>-->
+<!--                                <td>User Id:</td>-->
+<!--                                <td><input type="text" th:field="*{appUser}"/></td>-->
+<!--                            </tr>-->
+                        </table>
+                    </div>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="submit" class="btn btn-warning m-2">Create</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

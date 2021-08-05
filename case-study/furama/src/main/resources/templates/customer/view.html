@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<p th:replace="homePage :: header"></p>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Information :</h4>
+                <div>
+                    <table>
+                        <tr>
+                            <td>Customer Code:</td>
+                            <td th:text="${customer.customerCode}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Type:</td>
+                            <td th:text="${customer.customerType.customerTypeName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Name:</td>
+                            <td th:text="${customer.customerName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Birthday:</td>
+                            <td th:text="${customer.customerBirthday}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Gender:</td>
+                            <td th:text="${customer.customerGender}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Id Card:</td>
+                            <td th:text="${customer.customerIdCard}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Phone:</td>
+                            <td th:text="${customer.customerPhone}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Email:</td>
+                            <td th:text="${customer.customerEmail}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Address:</td>
+                            <td th:text="${customer.customerAddress}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <p class="mb-0">
+                    <a href="/customer"><button type="button" class="btn btn-warning m-2">Back to List Customer</button></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

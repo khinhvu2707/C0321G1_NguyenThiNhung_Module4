@@ -4,6 +4,8 @@ import com.example.model.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 public interface IEmployeeService {
     void save(Employee employee);
@@ -13,4 +15,6 @@ public interface IEmployeeService {
     void delete(Long id);
 
     Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name);
+
+    List<Employee> findAll();
 }

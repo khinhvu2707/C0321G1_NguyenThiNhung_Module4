@@ -23,10 +23,10 @@
             <div th:if="${message}">
                 <span th:text="${message}" style="color: red;margin: 5px"></span>
             </div>
-            <a href="/customer/create">
+            <a href="/employee/create">
                 <button type="button" class="btn btn-success m-2">Create</button>
             </a>
-            <div class="table-responsive-lg">
+            <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="table-success">
@@ -59,7 +59,7 @@
                         <td th:text="${employee.position.positionName}"></td>
                         <td th:text="${employee.educationDegree.educationDegreeName}"></td>
                         <td th:text="${employee.division.divisionName}"></td>
-                        <td><a>
+                        <td><a th:href="@{/employee/edit/__${employee.employeeId}__ }">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a></td>
                         <td>
@@ -68,14 +68,12 @@
                                 Delete
                             </button>
                         </td>
-                        <td><a>
-                            <button type="button" class="btn btn-warning">View</button>
+                        <td><a th:href="@{/employee/view/__${employee.employeeId}__ }">
+                            <button type="button" class="btn btn-warning" >View</button>
                         </a></td>
                     </tr>
                     </tbody>
                 </table>
-
-
                 <div>
                     <a class="btn btn-outline-success"
                        th:href="@{/employee(page=${employees.number - 1},search=${keyword})}"
@@ -98,7 +96,7 @@
     </div>
 </div>
 <!--Modal-->
-<form action="/customer/delete">
+<form action="/employee/delete">
     <div class="modal" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -121,12 +119,11 @@
     </div>
 </form>
 <!--Modal-->
-
-<footer th:replace="homePage :: footer"></footer>
 <script>
     function deleteEmployee(id) {
         document.getElementById('id').value = id;
     }
 </script>
+<footer th:replace="homePage :: footer"></footer>
 </body>
 </html>

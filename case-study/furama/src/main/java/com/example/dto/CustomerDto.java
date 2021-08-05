@@ -21,12 +21,14 @@ public class CustomerDto {
     private String customerBirthday;
     @NotNull(message = "Giới tính không được để trống!")
     private int customerGender;
-    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "Mã khách hàng phải đúng định dạng 9 hoặc 12 số")
+    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "scmnd phải đúng định dạng 9 hoặc 12 số")
     private String customerIdCard;
     @Pattern(regexp = "^090\\d{7}|\\(84\\)\\+90\\d{7}|091\\d{7}|\\(84\\)\\+91\\d{7}$",message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx")
     private String customerPhone;
+    @NotNull(message = "Email không được để trống!")
     @Email(message = "Email không đúng định dạng")
     private String customerEmail;
+    @NotNull(message = "Địa chỉ không được để trống!")
     @NotBlank(message = "Địa chỉ không được để trống!")
     private String customerAddress;
 
