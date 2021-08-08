@@ -2,8 +2,8 @@ package com.example.controller;
 
 import com.example.dto.ServiceDto;
 import com.example.model.entity.*;
-import com.example.model.repository.service.rentType.IRentTypeRepository;
-import com.example.model.repository.service.serviceType.IServiceTypeRepository;
+import com.example.model.repository.rentType.IRentTypeRepository;
+import com.example.model.repository.serviceType.IServiceTypeRepository;
 import com.example.model.service.service.IServiceService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +55,7 @@ public class ServiceController {
             model.addAttribute("serviceDto", serviceDto);
             return "/service/create";
         } else {
+            serviceDto.setFlag(1);
             Services services = new Services();
             BeanUtils.copyProperties(serviceDto, services);
             serviceService.save(services);
@@ -73,6 +74,9 @@ public class ServiceController {
         Page<Services> services = serviceService.findAllByServiceNameContaining(pageable, keyword);
         model.addAttribute("services", services);
         model.addAttribute("keyword", keyword);
+        if(services.isEmpty()){
+            model.addAttribute("message", "No content");
+        }
         return "/service/list";
     }
 
@@ -86,7 +90,8 @@ public class ServiceController {
     }
 
     @PostMapping("/edit")
-    public String update(@Valid @ModelAttribute ServiceDto serviceDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(@Valid @ModelAttribute ServiceDto serviceDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/service/edit";
         }
@@ -99,7 +104,9 @@ public class ServiceController {
 
     @GetMapping("/delete")
     public String showDeleteForm(@RequestParam Long id, RedirectAttributes redirectAttributes) {
-        serviceService.delete(id);
+        Services services = serviceService.findByServiceId(id);
+        services.setFlag(0);
+        serviceService.save(services);
         redirectAttributes.addFlashAttribute("message", "service deleted successfully");
         return "redirect:/services";
     }

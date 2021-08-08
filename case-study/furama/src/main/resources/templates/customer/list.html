@@ -13,19 +13,17 @@
             <ul th:replace="homePage :: left"></ul>
         </div>
         <div class="col-lg-10 pt-3 pb-3">
+            <h5 style="text-align: center;color: #1e7e34">List Customer</h5>
             <form action="/customer">
                 <div class="row">
-                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search by Customer Name" aria-label="Search"
                            name="search">
                     <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
                 </div>
             </form>
-            <div th:if="${message}">
-                <span th:text="${message}" style="color: red;margin: 5px"></span>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <span th:text="${message}" style="color: red;text-align: center"></span>
             </div>
-            <a href="/customer/create">
-                <button type="button" class="btn btn-success m-2">Create</button>
-            </a>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -34,12 +32,7 @@
                         <th scope="col">Code</th>
                         <th scope="col">Type</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Birthday</th>
                         <th scope="col">Gender</th>
-                        <th scope="col">Id Card</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">View</th>
@@ -51,47 +44,46 @@
                         <td th:text="${customer.customerCode}"></td>
                         <td th:text="${customer.customerType.customerTypeName}"></td>
                         <td th:text="${customer.customerName}"></td>
-                        <td th:text="${customer.customerBirthday}"></td>
                         <td th:if="${customer.customerGender==1}" th:text="Male"></td>
                         <td th:if="${customer.customerGender==0}" th:text="Female"></td>
-                        <td th:text="${customer.customerIdCard}"></td>
-                        <td th:text="${customer.customerPhone}"></td>
-                        <td th:text="${customer.customerEmail}"></td>
-                        <td th:text="${customer.customerAddress}"></td>
                         <td><a th:href="@{/customer/edit/__${customer.customerId}__ }">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a></td>
                         <td>
                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal" th:onclick="|deleteCustomer(${customer.customerId})|">
+                                    data-target="#exampleModal"
+                                    th:onclick="|deleteCustomer(${customer.customerId})|">
                                 Delete
                             </button>
                         </td>
                         <td><a th:href="@{/customer/view/__${customer.customerId}__ }">
-                            <button type="button" class="btn btn-warning" >View</button>
+                            <button type="button" class="btn btn-warning">View</button>
                         </a></td>
                     </tr>
                     </tbody>
                 </table>
-
-
                 <div>
-                    <a class="btn btn-outline-success"
-                       th:href="@{/customer(page=${customers.number - 1},search=${keyword})}"
-                       th:if="${customers.hasPrevious()}"> <span style="font-weight: bold"> < </span>
-                    </a>
-                    <span th:each="p : ${#numbers.sequence(0,customers.totalPages -1)}"
-                          th:if="${customers.hasContent()}">
-                    <a class="btn btn-outline-success"
+                    <div style="display: inline-block;width: 80%;float: left">
+                        <a class="btn btn-outline-success"
+                           th:href="@{/customer(page=${customers.number - 1},search=${keyword})}"
+                           th:if="${customers.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                        </a>
+                        <span th:each="p : ${#numbers.sequence(0,customers.totalPages -1)}"
+                              th:if="${customers.hasContent()}"><a class="btn btn-outline-success"
                        th:href="@{/customer(page=${p},search=${keyword})}" th:text="${p +1}"
                        th:if="${(p >(customers.number)-1)&&(p <(customers.number+2))}"></a></span>
-                    <a class="btn btn-outline-success"
-                       th:href="@{/customer(page=${customers.number + 1},search=${keyword})}"
-                       th:if="${customers.hasNext()}">
-                        <span style="font-weight: bold"> > </span>
-                    </a>
+                        <a class="btn btn-outline-success"
+                           th:href="@{/customer(page=${customers.number + 1},search=${keyword})}"
+                           th:if="${customers.hasNext()}">
+                            <span style="font-weight: bold"> > </span>
+                        </a>
+                    </div>
+                    <div style="display: inline-block;width: 20%">
+                        <a href="/customer/create">
+                            <button type="button" class="btn btn-success m-2">Create New Customer</button>
+                        </a>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -102,18 +94,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Delete</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <input type="hidden" id="id" name="id">
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <p>Are you sure ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>

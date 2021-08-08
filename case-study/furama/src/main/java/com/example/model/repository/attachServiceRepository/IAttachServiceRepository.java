@@ -1,4 +1,4 @@
-package com.example.model.repository.attachkServiceRepository;
+package com.example.model.repository.attachServiceRepository;
 
 import com.example.model.entity.AttachService;
 import org.springframework.data.jpa.repository.JpaRepository;

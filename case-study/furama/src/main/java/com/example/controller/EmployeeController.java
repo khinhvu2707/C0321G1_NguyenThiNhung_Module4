@@ -68,6 +68,8 @@ public class EmployeeController {
         } else {
             String newstring = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(new Date(System.currentTimeMillis()));
             employeeDto.setEmployeeBirthday(newstring);
+            employeeDto.setFlag(1);
+            employeeDto.getAppUser().setUserId(3L);
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto,employee);
             employeeService.save(employee);
@@ -78,14 +80,22 @@ public class EmployeeController {
 
     @GetMapping
     public String list(@PageableDefault(value = 5) Pageable pageable,
-                       @RequestParam Optional<String> search, Model model) {
-        String keyword = "";
-        if (search.isPresent()) {
-            keyword = search.get();
+                       @RequestParam Optional<String> employee,@RequestParam Optional<String> position, Model model) {
+        String keywordEmployee = "";
+        String keywordPosition = "";
+        if (employee.isPresent()) {
+            keywordEmployee = employee.get();
         }
-        Page<Employee> employees = employeeService.findAllByEmployeeNameContaining(pageable, keyword);
+        if (position.isPresent()) {
+            keywordPosition = position.get();
+        }
+        Page<Employee> employees = employeeService.findAllByEmployeeNameContaining(pageable, keywordEmployee , keywordPosition);
         model.addAttribute("employees", employees);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("keywordEmployee", keywordEmployee);
+        model.addAttribute("keywordPosition", keywordPosition);
+        if(employees.isEmpty()){
+            model.addAttribute("message", "No content");
+        }
         return "/employee/list";
     }
 
@@ -112,7 +122,9 @@ public class EmployeeController {
 
     @GetMapping("/delete")
     public String showDeleteForm(@RequestParam Long id, RedirectAttributes redirectAttributes) {
-        employeeService.delete(id);
+        Employee employee = employeeService.findByEmployeeId(id);
+        employee.setFlag(0);
+        employeeService.save(employee);
         redirectAttributes.addFlashAttribute("message", "employee deleted successfully");
         return "redirect:/employee";
     }

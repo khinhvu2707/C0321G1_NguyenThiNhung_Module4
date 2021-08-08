@@ -17,79 +17,115 @@
                 <input th:type="hidden" name="id" th:field="*{serviceId}">
                 <div class="alert alert-info" role="alert">
                     <h4 class="alert-heading">Please enter the information below !</h4>
-                    <div>
-                        <table>
-                            <tr>
-                                <td>Service Code:</td>
-                                <td><input type="text" th:field="*{serviceCode}" readonly></td>
-                                <td th:if="${#fields.hasErrors('serviceCode')}" th:errors="*{serviceCode}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Name:</td>
-                                <td><input type="text" th:field="*{serviceName}" ></td>
-                                <td th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Area:</td>
-                                <td><input type="text" th:field="*{serviceArea}"/></td>
-                                <td th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Cost:</td>
-                                <td><input type="text" th:field="*{serviceCost}"/></td>
-                                <td th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}">
-                                    Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Rent Type:</td>
-                                <td>
-                                    <select th:field="*{rentType}">
-                                        <option th:each="c : ${rentTypeList}" th:value="${c.rentTypeId}"
-                                                th:text="${c.rentTypeName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Service Type:</td>
-                                <td>
-                                    <select th:field="*{serviceType}">
-                                        <option th:each="c : ${serviceTypeList}" th:value="${c.serviceTypeId}"
-                                                th:text="${c.serviceTypeName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Standard Room:</td>
-                                <td><input type="text" th:field="*{standardRoom}"/></td>
-                                <td th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Description Other Convenience:</td>
-                                <td><input type="text" th:field="*{descriptionOtherConvenience}"/></td>
-                                <td th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Pool Area:</td>
-                                <td><input type="text" th:field="*{poolArea}"/></td>
-                                <td th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Number Of Floor:</td>
-                                <td><input type="text" th:field="*{numberOfFloor}"/></td>
-                                <td th:if="${#fields.hasErrors('numberOfFloor')}" th:errors="*{numberOfFloor}">
-                                    Error
-                                </td>
-                            </tr>
-                        </table>
+                    <hr>
+                    <div style="margin: 0 7%">
+                        <input type="hidden" th:field="*{flag}" class="form-control"/>
+                        <label class="col-md-4 control-label ">Service Code</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{serviceCode}" class="form-control" readonly/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('serviceCode')}" th:errors="*{serviceCode}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Service Name</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{serviceName}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Service Area</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{serviceArea}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Service Cost</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{serviceCost}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Rent Type</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{rentType}" class="custom-select">
+                                <option th:each="c : ${rentTypeList}" th:value="${c.rentTypeId}"
+                                        th:text="${c.rentTypeName}"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">Service Type</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{serviceType}" class="custom-select">
+                                <option th:each="c : ${serviceTypeList}" th:value="${c.serviceTypeId}"
+                                        th:text="${c.serviceTypeName}"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">StandardRoom</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{standardRoom}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Description Other Convenience</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{descriptionOtherConvenience}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+                             th:errors="*{descriptionOtherConvenience}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Pool Area</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{poolArea}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"
+                             style="color: red">Error
+                        </div>
+                        <label class="col-md-4 control-label ">Number Of Floor</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{numberOfFloor}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('numberOfFloor')}" th:errors="*{numberOfFloor}"
+                             style="color: red">Error
+                        </div>
                     </div>
                     <hr>
-                    <p class="mb-0">
+                    <div class="mb-0" style="margin: 0 90%">
                         <button type="submit" class="btn btn-warning m-2">Edit</button>
-                    </p>
+                    </div>
                 </div>
             </form>
         </div>

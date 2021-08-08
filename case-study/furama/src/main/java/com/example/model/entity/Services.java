@@ -32,11 +32,12 @@ public class Services {
     @JsonBackReference
     @OneToMany(mappedBy = "services", cascade = CascadeType.ALL)
     private Set<Contract> contractSet;
+    private int flag;
 
     public Services() {
     }
 
-    public Services(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet) {
+    public Services(Long serviceId, String serviceCode, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloor, Set<Contract> contractSet,int flag) {
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
@@ -50,6 +51,15 @@ public class Services {
         this.poolArea = poolArea;
         this.numberOfFloor = numberOfFloor;
         this.contractSet = contractSet;
+        this.flag = flag;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getServiceId() {

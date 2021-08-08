@@ -20,6 +20,7 @@ public class Employee {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAddress;
+    private int flag;
     @JsonManagedReference
     @ManyToOne(targetEntity = Position.class)
     @JoinColumn(name = "position_id",referencedColumnName = "positionId")
@@ -43,7 +44,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet) {
+    public Employee(Long employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, AppUser appUser, Set<Contract> contractSet,int flag) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -57,6 +58,7 @@ public class Employee {
         this.division = division;
         this.appUser = appUser;
         this.contractSet = contractSet;
+        this.flag = flag;
     }
 
     public Employee(Long employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division) {
@@ -71,6 +73,14 @@ public class Employee {
         this.position = position;
         this.educationDegree = educationDegree;
         this.division = division;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getEmployeeId() {

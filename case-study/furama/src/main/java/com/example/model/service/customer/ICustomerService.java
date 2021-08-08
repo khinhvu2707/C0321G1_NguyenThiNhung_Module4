@@ -13,7 +13,7 @@ public interface ICustomerService {
 
     void save(Customer customer);
 
-    void delete(Long id);
-
     List<Customer> findAll();
+
+    Page<Customer> findAllCustomerUserService(Pageable pageable,String name);
 }

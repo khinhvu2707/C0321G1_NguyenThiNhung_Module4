@@ -1,6 +1,7 @@
 package com.example.model.service.contract.impl;
 
 import com.example.model.entity.Contract;
+import com.example.model.entity.Customer;
 import com.example.model.repository.contract.IContractRepository;
 import com.example.model.service.contract.IContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,6 @@ public class ContractServiceImpl implements IContractService {
         contractRepository.save(contract);
     }
 
-    @Override
-    public void delete(Long id) {
-        contractRepository.delete(findByContractId(id));
-    }
 
     @Override
     public Contract findByContractId(Long id) {
@@ -31,12 +28,19 @@ public class ContractServiceImpl implements IContractService {
     }
 
     @Override
-    public Page<Contract> findAllByEmployeeName(Pageable pageable, String employeeName) {
-        return contractRepository.findAllByEmployeeName(pageable, "%"+employeeName+"%");
+    public Page<Contract> findAllByCustomerName(Pageable pageable, String employeeName) {
+        return contractRepository.findAllByCustomerName(pageable, "%"+employeeName+"%");
     }
 
     @Override
     public List<Contract> findAll() {
         return contractRepository.findAll();
     }
+
+    @Override
+    public Page<Contract> findByCustomer(Pageable pageable, Long id) {
+        return contractRepository.findByCustomer(pageable,id);
+    }
+
+
 }

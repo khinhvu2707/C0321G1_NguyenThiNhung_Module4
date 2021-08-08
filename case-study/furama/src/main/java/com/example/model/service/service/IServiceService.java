@@ -11,8 +11,6 @@ public interface IServiceService {
 
     Services findByServiceId(Long id);
 
-    void delete(Long id);
-
     Page<Services> findAllByServiceNameContaining(Pageable pageable, String name);
 
     List<Services> findAll();

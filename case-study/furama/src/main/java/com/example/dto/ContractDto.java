@@ -1,28 +1,29 @@
 package com.example.dto;
 
+import com.example.model.entity.AttachService;
 import com.example.model.entity.Customer;
 import com.example.model.entity.Employee;
 import com.example.model.entity.Services;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class ContractDto {
     private Long contractId;
-    @NotBlank(message = "Không được để trống")
     private String contractStartDate;
-    @NotBlank(message = "Không được để trống")
     private String contractEndDate;
-    @NotNull(message = "Không được để trống")
+    @NotNull(message = "Please fill out the form")
     @Min(0)
     private double contractDeposit;
-    @NotNull(message = "Không được để trống")
+    @NotNull(message = "Please fill out the form")
     @Min(0)
     private double contractTotalMoney;
     private Employee employee;
     private Customer customer;
     private Services services;
+    private int flag;
+    private String listAttachService;
 
     public ContractDto() {
     }
@@ -36,6 +37,35 @@ public class ContractDto {
         this.employee = employee;
         this.customer = customer;
         this.services = services;
+    }
+
+    public ContractDto(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, int flag,String listAttachService) {
+        this.contractId = contractId;
+        this.contractStartDate = contractStartDate;
+        this.contractEndDate = contractEndDate;
+        this.contractDeposit = contractDeposit;
+        this.contractTotalMoney = contractTotalMoney;
+        this.employee = employee;
+        this.customer = customer;
+        this.services = services;
+        this.flag = flag;
+        this.listAttachService = listAttachService;
+    }
+
+    public String getListAttachService() {
+        return listAttachService;
+    }
+
+    public void setListAttachService(String listAttachService) {
+        this.listAttachService = listAttachService;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getContractId() {

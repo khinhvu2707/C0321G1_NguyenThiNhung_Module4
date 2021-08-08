@@ -7,13 +7,17 @@
 </head>
 <body>
 <header class="container-fluid bg-light d-flex sticky-top" th:fragment="header">
-    <div class="col-lg-3">
+    <div class="col-lg-10">
         <img width="60px" height="60px" src="/image/furamalogo.png">
     </div>
-    <div class="col-lg-6"></div>
-    <div class="col-lg-3 d-flex justify-content-end">
-        <p style="padding-top: 20px">Tình Tuyết</p>
-        <img width="30px" height="30px" src="https://i2.wp.com/dl8.glitter-graphics.net/pub/1252/1252978iual7aoqdc.gif?zoom=2">
+    <div class="col-lg-2 d-flex justify-content-end">
+        <a th:if="${#request.userPrincipal}==null" th:href="@{/login}" style="margin-top: 15px">Login</a>
+        <span th:if="${#request.userPrincipal}!=null" style="margin-top: 15px"> Hi : <span
+                th:utext="${#request.userPrincipal.name}" style="color: red"></span></span>
+        <img width="30px" height="30px"
+             src="https://i2.wp.com/dl8.glitter-graphics.net/pub/1252/1252978iual7aoqdc.gif?zoom=2"
+             style="margin: 15px 5px 0 5px">
+        <a th:if="${#request.userPrincipal}!=null" th:href="@{/logout}" style="margin-top: 15px">Logout</a>
     </div>
 </header>
 <!--carouse-->
@@ -46,7 +50,7 @@
     </div>
 
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg border " style="background-color: seagreen;margin: 3px 0">
+    <nav class="navbar navbar-expand-lg border navbar-light" style="background-color: seagreen;margin: 3px 0">
         <a class="navbar-brand ml-5" href="/furama" style="color: snow">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,31 +60,31 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="navbar-brand ml-3" href="#"></a>
+                    <a class="navbar-brand ml-5"></a>
+                    <a class="navbar-brand ml-3"></a>
                     <a class="navbar-brand ml-5" href="/employee" style="color: snow">Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand ml-3" href="#"></a>
+                    <a class="navbar-brand ml-5"></a>
+                    <a class="navbar-brand ml-3"></a>
                     <a class="navbar-brand ml-5" href="/customer" style="color: snow">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand ml-3" href="#"></a>
+                    <a class="navbar-brand ml-5"></a>
+                    <a class="navbar-brand ml-3"></a>
                     <a class="navbar-brand ml-5" href="/services" style="color: snow">Service</a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand ml-3" href="#"></a>
+                    <a class="navbar-brand ml-5"></a>
+                    <a class="navbar-brand ml-3"></a>
                     <a class="navbar-brand ml-5" href="/contract" style="color: snow">Contract</a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand ml-3" href="#"></a>
+                    <a class="navbar-brand ml-5"></a>
+                    <a class="navbar-brand ml-3"></a>
                     <a class="navbar-brand ml-5" href="/contractDetail" style="color: snow">ContractDetail</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <a class="navbar-brand ml-5" href="#"></a>
-            </form>
         </div>
     </nav>
 </div>
@@ -88,20 +92,23 @@
     <div class="row">
         <div class="col-lg-2 border-right">
             <div th:fragment="left">
-                <div class="card m-3" >
-                    <img src="https://furamavietnam.com/wp-content/uploads/2018/07/CULIRARY.jpg" class="card-img-top" alt="..." style="height: 130px">
+                <div class="card m-3">
+                    <img src="https://furamavietnam.com/wp-content/uploads/2018/07/CULIRARY.jpg" class="card-img-top"
+                         alt="..." style="height: 130px">
                     <div class="card-body">
                         <p style="text-align: center">Ẩm thực</p>
                     </div>
                 </div>
                 <div class="card m-3">
-                    <img src="https://furamavietnam.com/wp-content/uploads/2018/07/RECREATION.jpg" class="card-img-top" alt="..." style="height: 130px">
+                    <img src="https://furamavietnam.com/wp-content/uploads/2018/07/RECREATION.jpg" class="card-img-top"
+                         alt="..." style="height: 130px">
                     <div class="card-body">
                         <p style="text-align: center">Giải trí</p>
                     </div>
                 </div>
                 <div class="card m-3">
-                    <img src="https://furamavietnam.com/wp-content/uploads/2018/10/02.-ICP-ICP_Furama_Danang_-Ball-Room-4.jpg" class="card-img-top" alt="..." style="height: 130px">
+                    <img src="https://furamavietnam.com/wp-content/uploads/2018/10/02.-ICP-ICP_Furama_Danang_-Ball-Room-4.jpg"
+                         class="card-img-top" alt="..." style="height: 130px">
                     <div class="card-body">
                         <p style="text-align: center">Sự kiện</p>
                     </div>
@@ -163,7 +170,10 @@
             </div>
             <!-- Hết Mặc định trang chủ-->
             <table style="border: solid #b1dfbb;margin: 10px;padding: 10px;display: inline-block">
-                <td><a class="navbar-brand ml-5" href="/customerContract?action=show" style="width: 100%"><img width="17px" height="17px" src="https://i1.wp.com/i646.photobucket.com/albums/uu185/vanhoai1111/th_68.gif?zoom=2">      Danh sách
+                <td><a class="navbar-brand ml-5" href="/customer/money" style="width: 100%"><img width="17px"
+                                                                                                 height="17px"
+                                                                                                 src="https://i1.wp.com/i646.photobucket.com/albums/uu185/vanhoai1111/th_68.gif?zoom=2">
+                    Danh sách
                     khách hàng đang sử dụng dịch vụ</a></td>
             </table>
 

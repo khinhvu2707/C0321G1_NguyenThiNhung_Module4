@@ -16,37 +16,42 @@
             <form th:action="@{/contractDetail/create}" th:object="${contractDetailDto}" method="post">
                 <div class="alert alert-info" role="alert">
                     <h4 class="alert-heading">Please enter the information below !</h4>
-                    <div>
-                        <table>
-                            <tr>
-                                <td>Contract:</td>
-                                <td>
-                                    <select th:field="*{contract}">
-                                        <option th:each="c : ${contractList}" th:value="${c.contractId}"
-                                                th:text="${c.contractId}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Attach Service:</td>
-                                <td>
-                                    <select th:field="*{attachService}">
-                                        <option th:each="c : ${attachServiceList}" th:value="${c.attachServiceId}"
-                                                th:text="${c.attachServiceName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Quantity:</td>
-                                <td><input type="text" th:field="*{quantity}"/></td>
-                                <td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Error</td>
-                            </tr>
-                        </table>
+                    <hr>
+                    <div style="margin: 0 7%">
+                        <label class="col-md-4 control-label ">Contract</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{contract}" class="custom-select">
+                                <option th:each="c : ${contractList}" th:value="${c.contractId}"
+                                        th:text="${c.contractId}"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">Attach Service</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{attachService}" class="custom-select">
+                                <option th:each="c : ${attachServiceList}" th:value="${c.attachServiceId}"
+                                        th:text="${c.attachServiceName}"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">Quantity</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{quantity}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" style="color: red">Error</div>
+                        <input type="hidden" th:field="*{flag}" class="form-control"/>
                     </div>
                     <hr>
-                    <p class="mb-0">
+                    <div class="mb-0" style="margin: 0 90%">
                         <button type="submit" class="btn btn-warning m-2">Create</button>
-                    </p>
+                    </div>
                 </div>
             </form>
         </div>

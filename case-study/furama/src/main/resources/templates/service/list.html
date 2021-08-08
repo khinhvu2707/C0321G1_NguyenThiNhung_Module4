@@ -13,19 +13,17 @@
             <ul th:replace="homePage :: left"></ul>
         </div>
         <div class="col-lg-10 pt-3 pb-3">
+            <h5 style="text-align: center;color: #1e7e34">List Service</h5>
             <form action="/services">
                 <div class="row">
-                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search by Service Name" aria-label="Search"
                            name="search">
                     <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
                 </div>
             </form>
-            <div th:if="${message}">
-                <span th:text="${message}" style="color: red;margin: 5px"></span>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <span th:text="${message}" style="color: red;text-align: center"></span>
             </div>
-            <a href="/services/create">
-                <button type="button" class="btn btn-success m-2">Create</button>
-            </a>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -34,14 +32,9 @@
                         <th scope="col">Code</th>
                         <th scope="col">Name</th>
                         <th scope="col">Area</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Max People</th>
                         <th scope="col">Rent Type</th>
                         <th scope="col">Service Type</th>
-                        <th scope="col">Standard Room</th>
-                        <th scope="col">Description Other Convenience</th>
-                        <th scope="col">Pool Area</th>
-                        <th scope="col">Number Of Floor</th>
+
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">View</th>
@@ -53,14 +46,8 @@
                         <td th:text="${service.serviceCode}"></td>
                         <td th:text="${service.serviceName}"></td>
                         <td th:text="${service.serviceArea}"></td>
-                        <td th:text="${service.serviceCost}"></td>
-                        <td th:text="${service.serviceMaxPeople}"></td>
                         <td th:text="${service.rentType.rentTypeName}"></td>
                         <td th:text="${service.serviceType.serviceTypeName}"></td>
-                        <td th:text="${service.standardRoom}"></td>
-                        <td th:text="${service.descriptionOtherConvenience}"></td>
-                        <td th:text="${service.poolArea}"></td>
-                        <td th:text="${service.numberOfFloor}"></td>
                         <td><a th:href="@{/services/edit/__${service.serviceId}__ }">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a></td>
@@ -76,25 +63,28 @@
                     </tr>
                     </tbody>
                 </table>
-
-
                 <div>
-                    <a class="btn btn-outline-success"
-                       th:href="@{/services(page=${services.number - 1},search=${keyword})}"
-                       th:if="${services.hasPrevious()}"> <span style="font-weight: bold"> < </span>
-                    </a>
-                    <span th:each="p : ${#numbers.sequence(0,services.totalPages -1)}"
-                          th:if="${services.hasContent()}">
-                    <a class="btn btn-outline-success"
+                    <div style="display: inline-block;width: 80%;float: left">
+                        <a class="btn btn-outline-success"
+                           th:href="@{/services(page=${services.number - 1},search=${keyword})}"
+                           th:if="${services.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                        </a>
+                        <span th:each="p : ${#numbers.sequence(0,services.totalPages -1)}"
+                              th:if="${services.hasContent()}"><a class="btn btn-outline-success"
                        th:href="@{/services(page=${p},search=${keyword})}" th:text="${p +1}"
                        th:if="${(p >(services.number)-1)&&(p <(services.number+2))}"></a></span>
-                    <a class="btn btn-outline-success"
-                       th:href="@{/services(page=${services.number + 1},search=${keyword})}"
-                       th:if="${services.hasNext()}">
-                        <span style="font-weight: bold"> > </span>
-                    </a>
+                        <a class="btn btn-outline-success"
+                           th:href="@{/services(page=${services.number + 1},search=${keyword})}"
+                           th:if="${services.hasNext()}">
+                            <span style="font-weight: bold"> > </span>
+                        </a>
+                    </div>
+                    <div style="display: inline-block;width: 20%">
+                        <a href="/services/create">
+                            <button type="button" class="btn btn-success m-2">Create New Service</button>
+                        </a>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -105,18 +95,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Delete</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <input type="hidden" id="id" name="id">
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <p>Are you sure ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>

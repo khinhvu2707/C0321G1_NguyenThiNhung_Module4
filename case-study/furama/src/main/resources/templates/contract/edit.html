@@ -13,70 +13,13 @@
             <ul th:replace="homePage :: left"></ul>
         </div>
         <div class="col-lg-10 pt-3 pb-3">
-            <form th:action="@{/contract/edit}" th:object="${contractDto}" method="post">
-                <input th:type="hidden" name="id" th:field="*{contractId}">
-                <div class="alert alert-info" role="alert">
-                    <h4 class="alert-heading">Please enter the information below !</h4>
-                    <div>
-                        <table>
-                            <tr>
-                                <td>Start date:</td>
-                                <td><input type="date" th:field="*{contractStartDate}" readonly></td>
-                                <td th:if="${#fields.hasErrors('contractStartDate')}" th:errors="*{contractStartDate}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>End date:</td>
-                                <td><input type="date" th:field="*{contractEndDate}"/></td>
-                                <td th:if="${#fields.hasErrors('contractEndDate')}" th:errors="*{contractEndDate}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Deposit:</td>
-                                <td><input type="text" th:field="*{contractDeposit}"/></td>
-                                <td th:if="${#fields.hasErrors('contractDeposit')}" th:errors="*{contractDeposit}">
-                                    Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total Money:</td>
-                                <td><input type="text" th:field="*{contractTotalMoney}"/></td>
-                                <td th:if="${#fields.hasErrors('contractTotalMoney')}" th:errors="*{contractTotalMoney}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Employee:</td>
-                                <td>
-                                    <select th:field="*{employee}">
-                                        <option th:each="c : ${employeeList}" th:value="${c.employeeId}"
-                                                th:text="${c.employeeName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer:</td>
-                                <td>
-                                    <select th:field="*{customer}">
-                                        <option th:each="c : ${customerList}" th:value="${c.customerId}"
-                                                th:text="${c.customerName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Type:</td>
-                                <td>
-                                    <select th:field="*{services}">
-                                        <option th:each="c : ${serviceList}" th:value="${c.serviceId}"
-                                                th:text="${c.serviceName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <hr>
-                    <p class="mb-0">
-                        <button type="submit" class="btn btn-warning m-2">Edit</button>
-                    </p>
-                </div>
-            </form>
+            <div class="alert alert-danger" role="alert">
+               <p> The signed contract cannot be changed! Let's delete it and create a new contract!</p>
+                <p>--- Hợp đồng đã ký kết thì không thể thay đổi ! Hãy xóa đi và tạo hợp đồng mới ! ---</p>
+            </div>
+            <div class="mb-0" style="margin-left: 70%">
+                <a href="/contract"><button type="button" class="btn btn-warning m-2">Back to List Contract</button></a>
+            </div>
         </div>
     </div>
 </div>

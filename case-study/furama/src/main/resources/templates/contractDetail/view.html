@@ -14,31 +14,44 @@
         </div>
         <div class="col-lg-10 pt-3 pb-3">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">Information :</h4>
-                <div>
-                    <table>
-                        <tr>
-                            <td>Contract:</td>
-                            <td th:text="${contractDetail.contract.contractId}"></td>
-                        </tr>
-                        <tr>
-                            <td>Attach Service:</td>
-                            <td th:text="${contractDetail.attachService.attachServiceName}"></td>
-                        </tr>
-                        <tr>
-                            <td>Quantity:</td>
-                            <td th:text="${contractDetail.quantity}"></td>
-                        </tr>
-                    </table>
+                <h4 class="alert-heading">Information Contract Detail :</h4>
+                        <div class="card mb-3" style="width: 70%;margin:20px 15%">
+                            <div class="row no-gutters">
+                                <div class="col-md-6">
+                                    <img src="/image/contract2.jpg" style="width: 100%">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body">
+
+                                        <table style="text-align: center;width: 90%">
+                                            <tr>
+                                                <td><img src="/image/icon.gif"></td>
+                                                <td>Contract:</td>
+                                                <td th:text="${contractDetail.contract.contractId}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="/image/icon.gif"></td>
+                                                <td>Attach Service:</td>
+                                                <td th:text="${contractDetail.attachService.attachServiceName}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="/image/icon.gif"></td>
+                                                <td>Quantity:</td>
+                                                <td th:text="${contractDetail.quantity}"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <hr>
+                    <div class="mb-0" style="margin-left: 70%">
+                        <a href="/contractDetail"><button type="button" class="btn btn-warning m-2">Back to List Contract Detail</button></a>
+                    </div>
                 </div>
-                <hr>
-                <p class="mb-0">
-                    <a href="/contractDetail"><button type="button" class="btn btn-warning m-2">Back to List Contract Detail</button></a>
-                </p>
             </div>
         </div>
     </div>
-</div>
-<footer th:replace="homePage :: footer"></footer>
+    <footer th:replace="homePage :: footer"></footer>
 </body>
 </html>

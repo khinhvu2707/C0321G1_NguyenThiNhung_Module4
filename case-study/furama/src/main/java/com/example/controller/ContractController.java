@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.ContractDto;
 import com.example.model.entity.*;
 import com.example.model.service.contract.IContractService;
+import com.example.model.service.contractDetail.IContractDetailService;
 import com.example.model.service.customer.ICustomerService;
 import com.example.model.service.employee.IEmployeeService;
 import com.example.model.service.service.IServiceService;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +39,9 @@ public class ContractController {
 
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private IContractDetailService contractDetailService;
 
     @ModelAttribute("customerList")
     public List<Customer> customerList() {
@@ -66,10 +71,25 @@ public class ContractController {
             model.addAttribute("contractDto", contractDto);
             return "/contract/create";
         } else {
-            String newstring = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(new Date(System.currentTimeMillis()));
-            contractDto.setContractStartDate(newstring);
+            String startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
+            contractDto.setContractStartDate(startDate);
+            Calendar end = Calendar.getInstance();
+            if (contractDto.getServices().getRentType().getRentTypeId() == 1) {
+                end.add(Calendar.YEAR, 1);
+            } else if (contractDto.getServices().getRentType().getRentTypeId() == 2){
+                end.add(Calendar.MONTH, 1);
+            }else if (contractDto.getServices().getRentType().getRentTypeId() == 3){
+                end.add(Calendar.DAY_OF_MONTH, 1);
+            }else {
+                end.add(Calendar.HOUR_OF_DAY, 1);
+            }
+            Date dateEnd = end.getTime();
+            String endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dateEnd);
+            contractDto.setContractEndDate(endDate);
+            contractDto.setFlag(1);
+            contractDto.setContractTotalMoney(contractDto.getServices().getServiceCost());
             Contract contract = new Contract();
-            BeanUtils.copyProperties(contractDto,contract);
+            BeanUtils.copyProperties(contractDto, contract);
             contractService.save(contract);
             redirectAttributes.addFlashAttribute("message", "New contract created successfully");
             return "redirect:/contract";
@@ -83,44 +103,43 @@ public class ContractController {
         if (search.isPresent()) {
             keyword = search.get();
         }
-        Page<Contract> contracts = contractService.findAllByEmployeeName(pageable, keyword);
+        Page<Contract> contracts = contractService.findAllByCustomerName(pageable, keyword);
         model.addAttribute("contracts", contracts);
         model.addAttribute("keyword", keyword);
+        if (contracts.isEmpty()) {
+            model.addAttribute("message", "No content");
+        }
         return "/contract/list";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Contract contract = contractService.findByContractId(id);
-        ContractDto contractDto = new ContractDto();
-        BeanUtils.copyProperties(contract,contractDto);
-        model.addAttribute("contractDto", contractDto);
+    @GetMapping("/edit")
+    public String showEditForm() {
         return "/contract/edit";
-    }
-
-    @PostMapping("/edit")
-    public String update(@Valid @ModelAttribute ContractDto contractDto, BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes) {
-        if(bindingResult.hasFieldErrors()){
-            return "/contract/edit";
-        }
-        Contract contract = new Contract();
-        BeanUtils.copyProperties(contractDto,contract);
-        contractService.save(contract);
-        redirectAttributes.addFlashAttribute("message", "contract updated successfully");
-        return "redirect:/contract";
     }
 
     @GetMapping("/delete")
     public String showDeleteForm(@RequestParam Long id, RedirectAttributes redirectAttributes) {
-        contractService.delete(id);
+        Contract contract = contractService.findByContractId(id);
+        contract.setFlag(0);
+        contractService.save(contract);
+        List<ContractDetail> contractDetailList = contractDetailService.findAllByContract_ContractId(id);
+        for (int i = 0; i < contractDetailList.size(); i++) {
+            contractDetailList.get(i).setFlag(0);
+            contractDetailService.save(contractDetailList.get(i));
+        }
         redirectAttributes.addFlashAttribute("message", "contract deleted successfully");
         return "redirect:/contract";
     }
 
     @GetMapping("/view/{id}")
     public String view(@PathVariable Long id, Model model) {
-        model.addAttribute("contract",contractService.findByContractId(id));
+        model.addAttribute("contract", contractService.findByContractId(id));
         return "/contract/view";
+    }
+
+    @GetMapping("/view-contract/{id}")
+    public String viewContract(@PageableDefault(value = 5) Pageable pageable,@PathVariable Long id, Model model) {
+        model.addAttribute("contracts", contractService.findByCustomer(pageable,id));
+        return "/contract/list";
     }
 }

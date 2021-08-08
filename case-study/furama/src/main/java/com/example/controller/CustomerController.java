@@ -51,6 +51,7 @@ public class CustomerController {
         } else {
             String newstring = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(new Date(System.currentTimeMillis()));
             customerDto.setCustomerBirthday(newstring);
+            customerDto.setFlag(1);
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto,customer);
             customerService.save(customer);
@@ -69,6 +70,9 @@ public class CustomerController {
         Page<Customer> customers = customerService.findAllByCustomerNameContaining(pageable, keyword);
         model.addAttribute("customers", customers);
         model.addAttribute("keyword", keyword);
+        if(customers.isEmpty()){
+            model.addAttribute("message", "No content");
+        }
         return "/customer/list";
     }
 
@@ -82,7 +86,8 @@ public class CustomerController {
     }
 
     @PostMapping("/edit")
-    public String update(@Valid @ModelAttribute CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(@Valid @ModelAttribute CustomerDto customerDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
         if(bindingResult.hasFieldErrors()){
             return "/customer/edit";
         }
@@ -95,7 +100,9 @@ public class CustomerController {
 
     @GetMapping("/delete")
     public String showDeleteForm(@RequestParam Long id, RedirectAttributes redirectAttributes) {
-        customerService.delete(id);
+        Customer customer = customerService.findByCustomerId(id);
+        customer.setFlag(0);
+        customerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "customer deleted successfully");
         return "redirect:/customer";
     }
@@ -104,5 +111,23 @@ public class CustomerController {
     public String view(@PathVariable Long id, Model model) {
         model.addAttribute("customer",customerService.findByCustomerId(id));
         return "/customer/view";
+    }
+
+
+    @GetMapping("/money")
+    public String listCustomerUseService(@PageableDefault(value = 5) Pageable pageable,
+                       @RequestParam Optional<String> search, Model model) {
+        String keyword = "";
+        if (search.isPresent()) {
+            keyword = search.get();
+        }
+        Page<Customer> customerUseServices = customerService.findAllCustomerUserService(pageable,keyword);
+        model.addAttribute("customerMoney", customerUseServices);
+        model.addAttribute("keyword", keyword);
+        System.out.println(customerUseServices);
+        if(customerUseServices.isEmpty()){
+            model.addAttribute("message", "No content");
+        }
+        return "/other/totalMoney";
     }
 }

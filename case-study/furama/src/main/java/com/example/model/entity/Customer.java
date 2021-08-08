@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Customer {
     private String customerCode;
     @JsonManagedReference
     @ManyToOne(targetEntity = CustomerType.class)
-    @JoinColumn(name = "customer_type_id",referencedColumnName = "customerTypeId")
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "customerTypeId")
     private CustomerType customerType;
     private String customerName;
     @Column(columnDefinition = "DATE")
@@ -25,12 +25,28 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
+    private int flag;
 
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Contract> contractSet;
 
     public Customer() {
+    }
+
+    public Customer(Long customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, int flag, Set<Contract> contractSet) {
+        this.customerId = customerId;
+        this.customerCode = customerCode;
+        this.customerType = customerType;
+        this.customerName = customerName;
+        this.customerBirthday = customerBirthday;
+        this.customerGender = customerGender;
+        this.customerIdCard = customerIdCard;
+        this.customerPhone = customerPhone;
+        this.customerEmail = customerEmail;
+        this.customerAddress = customerAddress;
+        this.flag = flag;
+        this.contractSet = contractSet;
     }
 
     public Customer(Long customerId, String customerCode, CustomerType customerType, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, Set<Contract> contractSet) {
@@ -45,6 +61,15 @@ public class Customer {
         this.customerEmail = customerEmail;
         this.customerAddress = customerAddress;
         this.contractSet = contractSet;
+    }
+
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getCustomerId() {

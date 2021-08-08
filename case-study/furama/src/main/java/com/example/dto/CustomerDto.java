@@ -10,32 +10,32 @@ import javax.validation.constraints.Pattern;
 
 public class CustomerDto {
     private Long customerId;
-    @NotBlank(message = "Mã khách hàng không được để trống!")
-    @Pattern(regexp = "^KH-\\d{4}$", message = "Mã khách hàng phải đúng định dạng KH-xxxx")
+    @NotBlank(message = "Please fill out the form")
+    @Pattern(regexp = "^KH-\\d{4}$", message = "Not valid (KH-xxxx)")
     private String customerCode;
     private CustomerType customerType;
-    @NotBlank(message = "Tên không được để trống!")
+    @NotBlank(message = "Please fill out the form")
     private String customerName;
     @Column(columnDefinition = "DATE")
-    @NotBlank(message = "Ngày sinh không được để trống!")
+    @NotBlank(message = "Please fill out the form")
     private String customerBirthday;
-    @NotNull(message = "Giới tính không được để trống!")
+    @NotNull(message = "Please fill out the form")
     private int customerGender;
-    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "scmnd phải đúng định dạng 9 hoặc 12 số")
+    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "Id Card not valid (9 or 12 number)")
     private String customerIdCard;
-    @Pattern(regexp = "^090\\d{7}|\\(84\\)\\+90\\d{7}|091\\d{7}|\\(84\\)\\+91\\d{7}$",message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx")
+    @Pattern(regexp = "^090\\d{7}|\\(84\\)\\+90\\d{7}|091\\d{7}|\\(84\\)\\+91\\d{7}$",message = "Telephone not valid (090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx)")
     private String customerPhone;
-    @NotNull(message = "Email không được để trống!")
-    @Email(message = "Email không đúng định dạng")
+    @NotNull(message = "Please fill out the form")
+    @Email(message = "Email not valid")
     private String customerEmail;
-    @NotNull(message = "Địa chỉ không được để trống!")
-    @NotBlank(message = "Địa chỉ không được để trống!")
+    @NotBlank(message = "Please fill out the form")
     private String customerAddress;
+    private int flag;
 
     public CustomerDto() {
     }
 
-    public CustomerDto(Long customerId, @NotBlank(message = "Mã khách hàng không được để trống!") @Pattern(regexp = "^KH-\\d{4}$", message = "Mã khách hàng phải đúng định dạng KH-xxxx") String customerCode, CustomerType customerType, @NotBlank(message = "Tên không được để trống!") String customerName, @NotBlank(message = "Ngày sinh không được để trống!") String customerBirthday, @NotNull(message = "Giới tính không được để trống!") int customerGender, @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "Mã khách hàng phải đúng định dạng 9 hoặc 12 số") String customerIdCard, @Pattern(regexp = "^090\\d{7}|\\(84\\)\\+90\\d{7}|091\\d{7}|\\(84\\)\\+91\\d{7}$", message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx") String customerPhone, @Email(message = "Email không đúng định dạng") String customerEmail, @NotBlank(message = "Địa chỉ không được để trống!") String customerAddress) {
+    public CustomerDto(Long customerId,String customerCode, CustomerType customerType,String customerName, String customerBirthday, int customerGender,String customerIdCard, String customerPhone,  String customerEmail,  String customerAddress) {
         this.customerId = customerId;
         this.customerCode = customerCode;
         this.customerType = customerType;
@@ -46,6 +46,28 @@ public class CustomerDto {
         this.customerPhone = customerPhone;
         this.customerEmail = customerEmail;
         this.customerAddress = customerAddress;
+    }
+
+    public CustomerDto(Long customerId,String customerCode, CustomerType customerType,String customerName, String customerBirthday, int customerGender,String customerIdCard, String customerPhone,  String customerEmail,  String customerAddress, int flag) {
+        this.customerId = customerId;
+        this.customerCode = customerCode;
+        this.customerType = customerType;
+        this.customerName = customerName;
+        this.customerBirthday = customerBirthday;
+        this.customerGender = customerGender;
+        this.customerIdCard = customerIdCard;
+        this.customerPhone = customerPhone;
+        this.customerEmail = customerEmail;
+        this.customerAddress = customerAddress;
+        this.flag = flag;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getCustomerId() {

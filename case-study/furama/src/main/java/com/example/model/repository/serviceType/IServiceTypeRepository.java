@@ -1,4 +1,4 @@
-package com.example.model.repository.service.serviceType;
+package com.example.model.repository.serviceType;
 
 import com.example.model.entity.ServiceType;
 import org.springframework.data.jpa.repository.JpaRepository;

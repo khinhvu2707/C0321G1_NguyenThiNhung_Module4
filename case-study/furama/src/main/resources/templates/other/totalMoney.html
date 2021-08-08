@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homePage :: head">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: nav"></div>
+<div class="container-fluid bg-light border ">
+    <div class="row">
+        <div class="col-lg-2 border-right">
+            <ul th:replace="homePage :: left"></ul>
+        </div>
+        <div class="col-lg-10 pt-3 pb-3">
+            <form action="/customer/money">
+                <div class="row">
+                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search" aria-label="Search"
+                           name="search">
+                    <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
+                </div>
+            </form>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <span th:text="${message}" style="color: red;text-align: center"></span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Code</th>
+                        <th scope="col">Customer Id Card</th>
+                        <th scope="col">Customer Type</th>
+                        <th scope="col">Edit Service</th>
+                        <th scope="col">Delete Service</th>
+                        <th scope="col">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="customer,status : ${customerMoney}">
+                        <th th:text="${status.count}"></th>
+                        <td th:text="${customer.customerName}"></td>
+                        <td th:text="${customer.customerCode}"></td>
+                        <td th:text="${customer.customerIdCard}"></td>
+                        <td th:text="${customer.customerType.customerTypeName}"></td>
+                        <td><a th:href="@{/customer/edit/__${customer.customerId}__ }">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    th:onclick="|deleteCustomer(${customer.customerId})|">
+                                Delete
+                            </button>
+                        </td>
+                        <td><a th:href="@{/contract/view-contract/__${customer.customerId}__ }">
+                            <button type="button" class="btn btn-warning">View</button>
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <a class="btn btn-outline-success"
+                   th:href="@{/customer/money(page=${customerMoney.number - 1},search=${keyword})}"
+                   th:if="${customerMoney.hasPrevious()}"> <span style="font-weight: bold"> < </span>
+                </a>
+                <span th:each="p : ${#numbers.sequence(0,customerMoney.totalPages -1)}"
+                      th:if="${customerMoney.hasContent()}">
+                    <a class="btn btn-outline-success"
+                       th:href="@{/customer/money(page=${p},search=${keyword})}" th:text="${p +1}"
+                       th:if="${(p >(customerMoney.number)-1)&&(p <(customerMoney.number+2))}"></a></span>
+                <a class="btn btn-outline-success"
+                   th:href="@{/customer/money(page=${customerMoney.number + 1},search=${keyword})}"
+                   th:if="${customerMoney.hasNext()}">
+                    <span style="font-weight: bold"> > </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="homePage :: footer"></footer>
+</body>
+</html>

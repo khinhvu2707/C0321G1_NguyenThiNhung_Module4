@@ -16,73 +16,90 @@
             <form th:action="@{/customer/create}" th:object="${customerDto}" method="post">
                 <div class="alert alert-info" role="alert">
                     <h4 class="alert-heading">Please enter the information below !</h4>
-                    <div>
-                        <table>
-                            <tr>
-                                <td>Customer Code:</td>
-                                <td><input type="text" th:field="*{customerCode}"/></td>
-                                <td th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Customer Type:</td>
-                                <td>
-                                    <select th:field="*{customerType}">
-                                        <option th:each="c : ${customerTypeList}" th:value="${c.customerTypeId}"
-                                                th:text="${c.customerTypeName}"></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Name:</td>
-                                <td><input type="text" th:field="*{customerName}"/></td>
-                                <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}">Error</td>
-                            </tr>
-                            <tr>
-                                <td>Customer Birthday:</td>
-                                <td><input type="date" th:field="*{customerBirthday}"/></td>
-                                <td th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}">
-                                    Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Gender:</td>
-                               <td> <select th:field="*{customerGender}">
+                    <hr>
+                    <div style="margin: 0 7%">
+                        <input th:field="*{flag}" type="hidden" class="form-control">
+                        <label class="col-md-4 control-label ">Customer Code</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input th:field="*{customerCode}" type="text" class="form-control">
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Type</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{customerType}" class="custom-select">
+                                <option th:each="c : ${customerTypeList}" th:value="${c.customerTypeId}"
+                                        th:text="${c.customerTypeName}"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">Customer Name</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{customerName}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Birthday</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="date" th:field="*{customerBirthday}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Gender</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <select th:field="*{customerGender}" class="custom-select">
                                 <option th:value="0" th:text="Male"></option>
-                                <option th:value="1" th:text="Female"></option></select> </td>
-                                <td th:if="${#fields.hasErrors('customerGender')}" th:errors="*{customerGender}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Id Card:</td>
-                                <td><input type="text" th:field="*{customerIdCard}"/></td>
-                                <td th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Phone:</td>
-                                <td><input type="text" th:field="*{customerPhone}"/></td>
-                                <td th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Email:</td>
-                                <td><input type="text" th:field="*{customerEmail}"/></td>
-                                <td th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}">Error
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Customer Address:</td>
-                                <td><input type="text" th:field="*{customerAddress}"/></td>
-                                <td th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}">
-                                    Error
-                                </td>
-                            </tr>
-                        </table>
+                                <option th:value="1" th:text="Female"></option>
+                            </select>
+                        </div>
+                        <label class="col-md-4 control-label ">Customer Id Card</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{customerIdCard}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Phone</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{customerPhone}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Email</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{customerEmail}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" style="color: red">Error</div>
+                        <label class="col-md-4 control-label ">Customer Address</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{customerAddress}" class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" style="color: red">Error</div>
                     </div>
                     <hr>
-                    <p class="mb-0">
+                    <div class="mb-0" style="margin: 0 90%">
                         <button type="submit" class="btn btn-warning m-2">Create</button>
-                    </p>
+                    </div>
                 </div>
             </form>
         </div>

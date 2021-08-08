@@ -12,9 +12,7 @@ public interface IEmployeeService {
 
     Employee findByEmployeeId(Long id);
 
-    void delete(Long id);
-
-    Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name);
+    Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name,String position);
 
     List<Employee> findAll();
 }

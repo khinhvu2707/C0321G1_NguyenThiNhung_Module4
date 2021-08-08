@@ -21,6 +21,16 @@ public class AppUser {
     @Column(name = "Enabled", length = 1, nullable = false)
     private boolean enabled;
 
+    public AppUser() {
+    }
+
+    public AppUser(Long userId, String userName, String encrytedPassword, boolean enabled) {
+        this.userId = userId;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+        this.enabled = enabled;
+    }
+
     public Long getUserId() {
         return userId;
     }

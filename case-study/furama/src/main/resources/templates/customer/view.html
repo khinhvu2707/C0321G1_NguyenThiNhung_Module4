@@ -13,52 +13,73 @@
             <ul th:replace="homePage :: left"></ul>
         </div>
         <div class="col-lg-10 pt-3 pb-3">
-            <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">Information :</h4>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Information Customer : </h4>
                 <div>
-                    <table>
-                        <tr>
-                            <td>Customer Code:</td>
-                            <td th:text="${customer.customerCode}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Type:</td>
-                            <td th:text="${customer.customerType.customerTypeName}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name:</td>
-                            <td th:text="${customer.customerName}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Birthday:</td>
-                            <td th:text="${customer.customerBirthday}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Gender:</td>
-                            <td th:text="${customer.customerGender}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Id Card:</td>
-                            <td th:text="${customer.customerIdCard}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Phone:</td>
-                            <td th:text="${customer.customerPhone}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Email:</td>
-                            <td th:text="${customer.customerEmail}"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Address:</td>
-                            <td th:text="${customer.customerAddress}"></td>
-                        </tr>
-                    </table>
+                    <div class="card mb-3" style="width: 70%;margin:20px 15%">
+                        <div class="row no-gutters">
+                            <div class="col-md-6">
+                                <img src="/image/hoa9.jpg" style="width: 100%">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <table style="text-align: center;width: 90%">
+                                        <tr><h5 class="card-title" th:text="${customer.customerName}"
+                                                style="text-align: center"></h5></tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Code:</td>
+                                            <td th:text="${customer.customerCode}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Type:</td>
+                                            <td th:text="${customer.customerType.customerTypeName}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Birthday:</td>
+                                            <td th:text="${customer.customerBirthday}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Gender:</td>
+                                            <td th:if="${customer.customerGender}==0" th:text="Male"></td>
+                                            <td th:if="${customer.customerGender}==1" th:text="FeMale"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Id Card:</td>
+                                            <td th:text="${customer.customerIdCard}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Phone:</td>
+                                            <td th:text="${customer.customerPhone}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Email:</td>
+                                            <td th:text="${customer.customerEmail}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/image/icon.gif"></td>
+                                            <td>Customer Address:</td>
+                                            <td th:text="${customer.customerAddress}"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <hr>
-                <p class="mb-0">
-                    <a href="/customer"><button type="button" class="btn btn-warning m-2">Back to List Customer</button></a>
-                </p>
+                <div class="mb-0" style="margin-left: 80%">
+                    <a href="/customer">
+                        <button type="button" class="btn btn-warning m-2">Back to List Customer</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

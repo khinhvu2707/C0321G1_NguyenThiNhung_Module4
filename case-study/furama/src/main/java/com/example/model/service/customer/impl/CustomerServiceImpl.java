@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Page<Customer> findAllByCustomerNameContaining(Pageable pageable, String name) {
-        return customerRepository.findAllByCustomerNameContaining(pageable, name);
+        return customerRepository.findAllByCustomerNameContaining(pageable, "%"+name+"%");
     }
 
     @Override
@@ -32,12 +32,13 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void delete(Long id) {
-        customerRepository.delete(findByCustomerId(id));
-    }
-
-    @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
+
+    @Override
+    public Page<Customer> findAllCustomerUserService(Pageable pageable, String name) {
+        return customerRepository.findAllCustomerUserService(pageable,"%"+name+"%");
+    }
+
 }

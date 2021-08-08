@@ -1,4 +1,4 @@
-package com.example.model.repository.service.rentType;
+package com.example.model.repository.rentType;
 
 import com.example.model.entity.RentType;
 import org.springframework.data.jpa.repository.JpaRepository;

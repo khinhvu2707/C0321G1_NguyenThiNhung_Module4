@@ -26,13 +26,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public void delete(Long id) {
-        employeeRepository.delete(findByEmployeeId(id));
-    }
-
-    @Override
-    public Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name) {
-        return employeeRepository.findAllByEmployeeNameContaining(pageable, name);
+    public Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name,String position) {
+        return employeeRepository.findAllByEmployeeNameContaining(pageable, "%"+name+"%","%" + position +"%");
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,9 +13,9 @@ public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contractId;
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATETIME")
     private String contractStartDate;
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATETIME")
     private String contractEndDate;
     private double contractDeposit;
     private double contractTotalMoney;
@@ -30,12 +31,26 @@ public class Contract {
     @ManyToOne(targetEntity = Services.class)
     @JoinColumn(name = "service_id",referencedColumnName = "serviceId")
     private Services services;
-
     @JsonBackReference
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<ContractDetail> contractDetailSet;
-
+    private int flag;
+    private String listAttachService;
     public Contract() {
+    }
+
+    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, Set<ContractDetail> contractDetailSet, int flag, String listAttachService) {
+        this.contractId = contractId;
+        this.contractStartDate = contractStartDate;
+        this.contractEndDate = contractEndDate;
+        this.contractDeposit = contractDeposit;
+        this.contractTotalMoney = contractTotalMoney;
+        this.employee = employee;
+        this.customer = customer;
+        this.services = services;
+        this.contractDetailSet = contractDetailSet;
+        this.flag = flag;
+        this.listAttachService = listAttachService;
     }
 
     public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, Set<ContractDetail> contractDetailSet) {
@@ -48,6 +63,22 @@ public class Contract {
         this.customer = customer;
         this.services = services;
         this.contractDetailSet = contractDetailSet;
+    }
+
+    public String getListAttachService() {
+        return listAttachService;
+    }
+
+    public void setListAttachService(String listAttachService) {
+        this.listAttachService = listAttachService;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public Long getContractId() {

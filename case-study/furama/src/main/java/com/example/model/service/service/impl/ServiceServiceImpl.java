@@ -25,13 +25,8 @@ public class ServiceServiceImpl implements IServiceService {
     }
 
     @Override
-    public void delete(Long id) {
-        serviceRepository.delete(findByServiceId(id));
-    }
-
-    @Override
     public Page<Services> findAllByServiceNameContaining(Pageable pageable, String name) {
-        return serviceRepository.findAllByServiceNameContaining(pageable, name);
+        return serviceRepository.findAllByServiceNameContaining(pageable, "%"+name+"%");
     }
 
     @Override
