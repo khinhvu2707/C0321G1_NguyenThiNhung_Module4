@@ -112,12 +112,6 @@ public class ContractController {
         }
         return "/contract/list";
     }
-//
-//    @GetMapping("/edit")
-//    public String showEditForm() {
-//        return "/contract/edit";
-//    }
-
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -136,8 +130,8 @@ public class ContractController {
         }
         String end = contractDto.getContractStartDate();
         Calendar calendar = Calendar.getInstance();
-        Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end);
-        calendar.setTime(date1);
+        Date dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end);
+        calendar.setTime(dateFormat);
         if (contractDto.getServices().getRentType().getRentTypeId() == 1) {
             calendar.add(Calendar.YEAR, 1);
         } else if (contractDto.getServices().getRentType().getRentTypeId() == 2) {
