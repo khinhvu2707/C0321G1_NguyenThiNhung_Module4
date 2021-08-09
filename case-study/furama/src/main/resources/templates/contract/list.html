@@ -48,7 +48,7 @@
                         <td th:unless="${contract.listAttachService.isEmpty()}" th:text="${contract.listAttachService}"></td>
                         <td th:if="${contract.listAttachService.isEmpty()}"><span>No Attach Service</span></td>
                         <td th:text="${contract.contractTotalMoney}"></td>
-                        <td><a th:href="@{/contract/edit}">
+                        <td><a th:href="@{/contract/edit/__${contract.contractId}__}">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a></td>
                         <td>

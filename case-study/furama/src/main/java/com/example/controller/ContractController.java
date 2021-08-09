@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -111,10 +112,55 @@ public class ContractController {
         }
         return "/contract/list";
     }
+//
+//    @GetMapping("/edit")
+//    public String showEditForm() {
+//        return "/contract/edit";
+//    }
 
-    @GetMapping("/edit")
-    public String showEditForm() {
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Contract contract = contractService.findByContractId(id);
+        ContractDto contractDto = new ContractDto();
+        BeanUtils.copyProperties(contract, contractDto);
+        model.addAttribute("contractDto", contractDto);
         return "/contract/edit";
+    }
+
+    @PostMapping("/edit")
+    public String update(@Valid @ModelAttribute ContractDto contractDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) throws ParseException {
+        if (bindingResult.hasFieldErrors()) {
+            return "/contract/edit";
+        }
+        String end = contractDto.getContractStartDate();
+        Calendar calendar = Calendar.getInstance();
+        Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end);
+        calendar.setTime(date1);
+        if (contractDto.getServices().getRentType().getRentTypeId() == 1) {
+            calendar.add(Calendar.YEAR, 1);
+        } else if (contractDto.getServices().getRentType().getRentTypeId() == 2) {
+            calendar.add(Calendar.MONTH, 1);
+        } else if (contractDto.getServices().getRentType().getRentTypeId() == 3) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        } else {
+            calendar.add(Calendar.HOUR_OF_DAY, 1);
+        }
+        Date dateEnd = calendar.getTime();
+        String endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dateEnd);
+        contractDto.setContractEndDate(endDate);
+        Double totalMoney = 0.0;
+        List<ContractDetail> contractDetailList = contractDetailService.findAllByContract_ContractId(contractDto.getContractId());
+        for (int i = 0; i < contractDetailList.size(); i++) {
+            totalMoney += contractDetailList.get(i).getAttachService().getAttachServiceCost() * contractDetailList.get(i).getQuantity();
+        }
+        contractDto.setContractTotalMoney(contractDto.getServices().getServiceCost() + totalMoney);
+        Contract contract = new Contract();
+        BeanUtils.copyProperties(contractDto, contract);
+        contractService.save(contract);
+        redirectAttributes.addFlashAttribute("message", "contract updated successfully");
+        return "redirect:/contract";
     }
 
     @GetMapping("/delete")
