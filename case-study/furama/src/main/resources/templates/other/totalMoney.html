@@ -32,8 +32,6 @@
                         <th scope="col">Customer Code</th>
                         <th scope="col">Customer Id Card</th>
                         <th scope="col">Customer Type</th>
-                        <th scope="col">Edit Service</th>
-                        <th scope="col">Delete Service</th>
                         <th scope="col">View</th>
                     </tr>
                     </thead>
@@ -44,16 +42,6 @@
                         <td th:text="${customer.customerCode}"></td>
                         <td th:text="${customer.customerIdCard}"></td>
                         <td th:text="${customer.customerType.customerTypeName}"></td>
-                        <td><a th:href="@{/customer/edit/__${customer.customerId}__ }">
-                            <button type="button" class="btn btn-primary">Edit</button>
-                        </a></td>
-                        <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    th:onclick="|deleteCustomer(${customer.customerId})|">
-                                Delete
-                            </button>
-                        </td>
                         <td><a th:href="@{/contract/view-contract/__${customer.customerId}__ }">
                             <button type="button" class="btn btn-warning">View</button>
                         </a></td>

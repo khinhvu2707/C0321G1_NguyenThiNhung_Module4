@@ -35,20 +35,36 @@ values("DV-0000",'Vip1',300,5000000,10,1,1,'5sao','Drink Free',30,5),
 ("DV-0005",'Vip5',300,5000000,15,1,3,'5sao','Drink Free',50,9),
 ("DV-0006",'Vip6',200,4000000,9,1,3,'5sao','Drink Free',20,7);
 
+insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED) 
+values (1, 'tinhtuyet', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1),
+(2, 'linhlung', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1),
+(3, 'tieuthanhi', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1);
 
-insert into employee (employee_name,employee_birthday,employee_id_card,employee_salary,employee_phone,employee_email,employee_address,position_id,education_degree_id,division_id,username)
-values ('Tình Tuyết',"1995-07-27",34346456,10000000,0909857611,'tinhtuyet@gmail','Đà Nẵng',6,4,4,'tinhtuyet'),
-('Linh Lung','1998-11-30',3896456,8000000,0909857612,'linhlung@gmail','Huế',5,3,1,'linhlung'),
-('Tiểu Thần Hi','1995-10-04',35346456,7000000,0909857613,'tieuthanhi@gmail','Đà Nẵng',3,2,3,'tieuthanhi'),
-('Thiên Vũ','1997-01-30',35346456,8000000,0909857614,'thienvu@gmail','Hà Nội',5,3,2,'thienvu'),
-('Bạch Quyết','1994-05-24',35346456,10000000,0909857615,'bachquyet@gmail','Quảng Bình',4,3,4,'bachquyet');
+insert into app_role (ROLE_ID, ROLE_NAME) values (1, 'ROLE_ADMIN');
+
+insert into app_role (ROLE_ID, ROLE_NAME) values (2, 'ROLE_USER');
+
+insert into user_role (ID, USER_ID, ROLE_ID) values (1, 1, 1);
+
+insert into user_role (ID, USER_ID, ROLE_ID) values (2, 1, 2);
+
+insert into user_role (ID, USER_ID, ROLE_ID) values (3, 2, 2);
+insert into user_role (ID, USER_ID, ROLE_ID) values (4, 2, 1);
+insert into user_role (ID, USER_ID, ROLE_ID) values (5, 3, 2);
+
+insert into employee (employee_name,employee_birthday,employee_id_card,employee_salary,employee_phone,employee_email,employee_address,position_id,education_degree_id,division_id,user_id)
+values ('Tình Tuyết',"1995-07-27",34346456,10000000,0909857611,'tinhtuyet@gmail','Đà Nẵng',6,4,4,1),
+('Linh Lung','1998-11-30',3896456,8000000,0909857612,'linhlung@gmail','Huế',5,3,1,2),
+('Tiểu Thần Hi','1995-10-04',35346456,7000000,0909857613,'tieuthanhi@gmail','Đà Nẵng',3,2,3,3),
+('Thiên Vũ','1997-01-30',35346456,8000000,0909857614,'thienvu@gmail','Hà Nội',5,3,2,4),
+('Bạch Quyết','1994-05-24',35346456,10000000,0909857615,'bachquyet@gmail','Quảng Bình',4,3,4,5);
 
 insert into attach_service
-values (1,500000,"massage","empty",1),
-(2,400000,"karaoke","empty",1),
-(3,200000,"food","empty",1),
-(4,100000,"drinks","empty",1),
-(5,500000,"car","empty",1);
+values (1,500000,"Massage","empty",1),
+(2,400000,"Karaoke","empty",1),
+(3,200000,"Food","empty",1),
+(4,100000,"Drinks","empty",1),
+(5,500000,"Car","empty",1);
 
 insert into contract (contract_start_date,contract_end_date,contract_deposit,contract_total_money,employee_id,customer_id,service_id)
 values ('2020-1-1','2020-1-10',1000000,10000000,2,2,3),
