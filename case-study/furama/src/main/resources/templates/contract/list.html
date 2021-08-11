@@ -29,7 +29,6 @@
                     <thead>
                     <tr class="table-success">
                         <th scope="col">#</th>
-                        <th scope="col">Contract Start Date</th>
                         <th scope="col">Customer</th>
                         <th scope="col">Service</th>
                         <th scope="col" style="width: 20%">List Attach Service</th>
@@ -37,12 +36,12 @@
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">View</th>
+                        <th scope="col">Create Contract Detail</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="contract,status : ${contracts}">
                         <th th:text="${status.count}"></th>
-                        <td th:text="${contract.contractStartDate}"></td>
                         <td th:text="${contract.customer.customerName}"></td>
                         <td th:text="${contract.services.serviceName}"></td>
                         <td th:unless="${contract.listAttachService.isEmpty()}" th:text="${contract.listAttachService}"></td>
@@ -59,6 +58,9 @@
                         </td>
                         <td><a th:href="@{/contract/view/__${contract.contractId}__ }">
                             <button type="button" class="btn btn-warning" >View</button>
+                        </a></td>
+                        <td><a th:href="@{/contract/create-contractDetail/__${contract.contractId}__ }">
+                            <button type="button" class="btn btn-info">Create Contract Detail</button>
                         </a></td>
                     </tr>
                     </tbody>

@@ -1,7 +1,9 @@
 package com.example.controller;
 
+import com.example.dto.ContractDetailDto;
 import com.example.dto.ContractDto;
 import com.example.model.entity.*;
+import com.example.model.repository.attachServiceRepository.IAttachServiceRepository;
 import com.example.model.service.contract.IContractService;
 import com.example.model.service.contractDetail.IContractDetailService;
 import com.example.model.service.customer.ICustomerService;
@@ -42,6 +44,9 @@ public class ContractController {
     private IEmployeeService employeeService;
 
     @Autowired
+    private IAttachServiceRepository attachServiceRepository;
+
+    @Autowired
     private IContractDetailService contractDetailService;
 
     @ModelAttribute("customerList")
@@ -57,6 +62,11 @@ public class ContractController {
     @ModelAttribute("employeeList")
     public List<Employee> employeeList() {
         return employeeService.findAll();
+    }
+
+    @ModelAttribute("attachServiceList")
+    public List<AttachService> attachServiceList() {
+        return attachServiceRepository.findAll();
     }
 
     @GetMapping("/create")
@@ -179,4 +189,41 @@ public class ContractController {
         model.addAttribute("contracts", contractService.findByCustomer(pageable,id));
         return "/contract/list";
     }
+
+    @GetMapping("/create-contractDetail/{id}")
+    public String showCreate(@PathVariable Long id,Model model) {
+        Contract contract = contractService.findByContractId(id);
+        ContractDetailDto contractDetailDto = new ContractDetailDto();
+        contractDetailDto.setContract(contract);
+        model.addAttribute("contractDetailDto",contractDetailDto);
+        return "/contract/createContractDetail";
+    }
+
+    @PostMapping("/create-contractDetail")
+    public String create(@Valid @ModelAttribute ContractDetailDto contractDetailDto, BindingResult bindingResult, Model model,
+                         RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("contractDetailDto", contractDetailDto);
+            return "/contract/createContractDetail";
+        } else {
+            Contract contract = contractService.findByContractId(contractDetailDto.getContract().getContractId());
+            Double newTotalMoney = contract.getContractTotalMoney() + contractDetailDto.getQuantity()*contractDetailDto.getAttachService().getAttachServiceCost();
+            contract.setContractTotalMoney(newTotalMoney);
+            String listAttachService = "";
+            if(contract.getListAttachService().isEmpty()){
+                listAttachService = contractDetailDto.getAttachService().getAttachServiceName() +"-Quantity: " +contractDetailDto.getQuantity();
+            }
+            else {
+                listAttachService = contract.getListAttachService()  +" , " + contractDetailDto.getAttachService().getAttachServiceName() +"-Quantity: " +contractDetailDto.getQuantity();
+            }
+            contract.setListAttachService(listAttachService);
+            contractDetailDto.setFlag(1);
+            ContractDetail contractDetail = new ContractDetail();
+            BeanUtils.copyProperties(contractDetailDto,contractDetail);
+            contractDetailService.save(contractDetail);
+            redirectAttributes.addFlashAttribute("message", "New Contract Detail created successfully");
+            return "redirect:/contract";
+        }
+    }
+
 }
