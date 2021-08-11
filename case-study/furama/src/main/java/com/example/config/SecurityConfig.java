@@ -43,37 +43,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-//         Các trang không yêu cầu login
         http.authorizeRequests().antMatchers("/", "/login", "/logout", "/furama").permitAll();
 
-        // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
-        // Nếu chưa login, nó sẽ redirect tới trang /login.
-        http.authorizeRequests().antMatchers("/employee","/customer","/services","/contract","/contractDetail","/customer/money").access("hasAnyRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/employee/**","/customer/**","/services/**","/contract/**","/contractDetail/**","/customer/money/**").access("hasAnyRole('ROLE_ADMIN')");
 
-        // Trang chỉ dành cho ADMIN
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
-
-        // Khi người dùng đã login, với vai trò XX.
-        // Nhưng truy cập vào trang yêu cầu vai trò YY,
-        // Ngoại lệ AccessDeniedException sẽ ném ra.
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
-        // Cấu hình cho Login Form.
         http.authorizeRequests().and().formLogin()//
-                // Submit URL của trang login
-                .loginProcessingUrl("/j_spring_security_check") // Submit URL
-                .loginPage("/login")//
-                .defaultSuccessUrl("/furama")//
-                .failureUrl("/login?error=true")//
-                .usernameParameter("username")//
+                .loginProcessingUrl("/j_spring_security_check")
+                .loginPage("/login")
+                .defaultSuccessUrl("/furama")
+                .failureUrl("/login?error=true")
+                .usernameParameter("username")
                 .passwordParameter("password")
-                // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/furama");
 
-        // Cấu hình Remember Me.
         http.authorizeRequests().and() //
-                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(1 * 24 * 60 * 60);
 
     }
 
