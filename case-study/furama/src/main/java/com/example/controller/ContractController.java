@@ -144,15 +144,12 @@ public class ContractController {
         Date dateEnd = calendar.getTime();
         String endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dateEnd);
         contractDto.setContractEndDate(endDate);
-        Double totalMoney = 0.0;
-        List<ContractDetail> contractDetailList = contractDetailService.findAllByContract_ContractId(contractDto.getContractId());
-        for (int i = 0; i < contractDetailList.size(); i++) {
-            totalMoney += contractDetailList.get(i).getAttachService().getAttachServiceCost() * contractDetailList.get(i).getQuantity();
-        }
+        Contract contract = contractService.findByContractId(contractDto.getContractId());
+        Double totalMoney = contract.getContractTotalMoney()-contract.getServices().getServiceCost();
         contractDto.setContractTotalMoney(contractDto.getServices().getServiceCost() + totalMoney);
-        Contract contract = new Contract();
-        BeanUtils.copyProperties(contractDto, contract);
-        contractService.save(contract);
+        Contract newContract = new Contract();
+        BeanUtils.copyProperties(contractDto, newContract);
+        contractService.save(newContract);
         redirectAttributes.addFlashAttribute("message", "contract updated successfully");
         return "redirect:/contract";
     }
