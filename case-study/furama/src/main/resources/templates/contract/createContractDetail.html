@@ -26,6 +26,13 @@
                             </div>
                             <input type="text" th:field="*{contract}"class="form-control" readonly/>
                         </div>
+                        <label class="col-md-4 control-label ">Customer Name </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{contract.customer.customerName}"class="form-control" readonly/>
+                        </div>
                         <label class="col-md-4 control-label ">Attach Service</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
