@@ -16,9 +16,9 @@
             <h5 style="text-align: center;color: #1e7e34">List Contract</h5>
             <form action="/contract">
                 <div class="row">
-                    <input class="form-control col-lg-9 m-lg-3" type="search" placeholder="Search by Customer Name" aria-label="Search"
+                    <input class="form-control col-lg-10 m-lg-3" type="search" placeholder="Search by Customer Name" aria-label="Search"
                            name="search">
-                    <button class="btn btn-outline-success col-lg-2 m-lg-3" type="submit">Search</button>
+                    <button class="btn btn-outline-success col-lg-1 m-lg-3" type="submit">Search</button>
                 </div>
             </form>
             <div th:if="${message}" class="alert alert-warning" role="alert">
@@ -59,7 +59,7 @@
                         <td><a th:href="@{/contract/view/__${contract.contractId}__ }">
                             <button type="button" class="btn btn-warning" >View</button>
                         </a></td>
-                        <td><a th:href="@{/contract/create-contractDetail/__${contract.contractId}__ }">
+                        <td style="text-align: center"><a th:href="@{/contract/create-contractDetail/__${contract.contractId}__ }">
                             <button type="button" class="btn btn-info">Create Contract Detail</button>
                         </a></td>
                     </tr>
@@ -82,7 +82,7 @@
                             <span style="font-weight: bold"> > </span>
                         </a>
                     </div>
-                    <div style="display: inline-block;width: 20%">
+                    <div style="display: inline-block;width: 20%;text-align: center">
                         <a href="/contract/create">
                             <button type="button" class="btn btn-success m-2">Create New Contract</button>
                         </a>

@@ -15,10 +15,19 @@
         <div class="col-lg-10 pt-3 pb-3">
             <h5 style="text-align: center;color: #1e7e34">List Employee</h5>
             <form action="/employee">
-                <div class="row">
-                    <input class="form-control col-lg-5 m-lg-3" type="search" placeholder="Search By Employee Name" aria-label="Search" name="employee">
-                    <input class="form-control col-lg-5 m-lg-3" type="search" placeholder="Search By Position" aria-label="Search" name="position">
-                    <button class="btn btn-outline-success col-lg-1 m-lg-3" type="submit">Search</button>
+                <div class="row m-3">
+                    <div class="col-sm-5">
+                        <input class="form-control" type="search" placeholder="Search By Employee Name"
+                               aria-label="Search" name="employee">
+                    </div>
+                    <div class="col-sm-5"><select name="position" class="custom-select">
+                        <option disabled="disabled" selected="selected" value="">No</option>
+                        <option th:each="p : ${positionList}" th:value="${p.positionName}"
+                                th:text="${p.positionName}"></option>
+                    </select></div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-outline-success" type="submit" style="width: 100%">Search</button>
+                    </div>
                 </div>
             </form>
             <div th:if="${message}" class="alert alert-warning" role="alert">
@@ -69,7 +78,8 @@
                         <span th:each="p : ${#numbers.sequence(0,employees.totalPages -1)}"
                               th:if="${employees.hasContent()}">
                     <a class="btn btn-outline-success"
-                       th:href="@{/employee(page=${p},employee=${keywordEmployee},position=${keywordPosition})}" th:text="${p +1}"
+                       th:href="@{/employee(page=${p},employee=${keywordEmployee},position=${keywordPosition})}"
+                       th:text="${p +1}"
                        th:if="${(p >(employees.number)-1)&&(p <(employees.number+2))}"></a></span>
                         <a class="btn btn-outline-success"
                            th:href="@{/employee(page=${employees.number + 1},employee=${keywordEmployee},position=${keywordPosition})}"
@@ -77,10 +87,10 @@
                             <span style="font-weight: bold"> > </span>
                         </a>
                     </div>
-                    <div style="display: inline-block;width: 20%">
-                    <a href="/employee/create">
-                        <button type="button" class="btn btn-success m-2">Create New Employee</button>
-                    </a>
+                    <div style="display: inline-block;width: 20%;text-align: center">
+                        <a href="/employee/create">
+                            <button type="button" class="btn btn-success m-2">Create New Employee</button>
+                        </a>
                     </div>
                 </div>
             </div>

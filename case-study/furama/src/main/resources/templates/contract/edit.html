@@ -20,8 +20,20 @@
                     <hr>
                     <div style="margin: 0 7%">
                         <input type="hidden" th:field="*{flag}" class="form-control"/>
-                        <input type="hidden" th:field="*{contractStartDate}" class="form-control"/>
-                        <input type="hidden" th:field="*{contractEndDate}" class="form-control"/>
+                        <label class="col-md-4 control-label ">Start Date</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{contractStartDate}" class="form-control" readonly/>
+                        </div>
+                        <label class="col-md-4 control-label ">End Date</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                            </div>
+                            <input type="text" th:field="*{contractEndDate}" class="form-control" readonly/>
+                        </div>
                         <input type="hidden" th:field="*{listAttachService}" class="form-control"/>
                         <label class="col-md-4 control-label ">Deposit</label>
                         <div class="input-group mb-2">

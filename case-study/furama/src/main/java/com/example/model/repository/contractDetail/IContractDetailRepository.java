@@ -15,4 +15,6 @@ public interface IContractDetailRepository extends JpaRepository<ContractDetail,
     Page<ContractDetail> findAll(Pageable pageable);
 
     List<ContractDetail> findAllByContract_ContractId(Long id);
+
+
 }

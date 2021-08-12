@@ -1,6 +1,7 @@
 package com.example.model.service.contract;
 
 import com.example.model.entity.Contract;
+import com.example.model.entity.ContractDetail;
 import com.example.model.entity.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

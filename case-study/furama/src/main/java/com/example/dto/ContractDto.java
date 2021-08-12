@@ -1,9 +1,6 @@
 package com.example.dto;
 
-import com.example.model.entity.AttachService;
-import com.example.model.entity.Customer;
-import com.example.model.entity.Employee;
-import com.example.model.entity.Services;
+import com.example.model.entity.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -22,10 +19,25 @@ public class ContractDto {
     private Employee employee;
     private Customer customer;
     private Services services;
+    private List<ContractDetail> contractDetailList;
     private int flag;
     private String listAttachService;
 
     public ContractDto() {
+    }
+
+    public ContractDto(Long contractId, String contractStartDate, String contractEndDate, @NotNull(message = "Please fill out the form") @Min(0) double contractDeposit, @NotNull(message = "Please fill out the form") @Min(0) double contractTotalMoney, Employee employee, Customer customer, Services services, List<ContractDetail> contractDetailList, int flag, String listAttachService) {
+        this.contractId = contractId;
+        this.contractStartDate = contractStartDate;
+        this.contractEndDate = contractEndDate;
+        this.contractDeposit = contractDeposit;
+        this.contractTotalMoney = contractTotalMoney;
+        this.employee = employee;
+        this.customer = customer;
+        this.services = services;
+        this.contractDetailList = contractDetailList;
+        this.flag = flag;
+        this.listAttachService = listAttachService;
     }
 
     public ContractDto(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services) {
@@ -132,4 +144,11 @@ public class ContractDto {
         this.services = services;
     }
 
+    public List<ContractDetail> getContractDetailList() {
+        return contractDetailList;
+    }
+
+    public void setContractDetailList(List<ContractDetail> contractDetailList) {
+        this.contractDetailList = contractDetailList;
+    }
 }

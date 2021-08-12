@@ -1,6 +1,7 @@
 package com.example.model.repository.contract;
 
 import com.example.model.entity.Contract;
+import com.example.model.entity.ContractDetail;
 import com.example.model.entity.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,5 +22,6 @@ public interface IContractRepository extends JpaRepository<Contract, Long> {
 
     @Query(value ="select * from contract co join customer cu on co.customer_id=cu.customer_id where cu.customer_id like :id and co.flag=1",nativeQuery = true)
     Page<Contract> findByCustomer(Pageable pageable,@Param("id") Long id);
+
 
 }

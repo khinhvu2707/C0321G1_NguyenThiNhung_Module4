@@ -33,13 +33,13 @@ public class Contract {
     private Services services;
     @JsonBackReference
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
-    private Set<ContractDetail> contractDetailSet;
+    private List<ContractDetail> contractDetailList;
     private int flag;
     private String listAttachService;
     public Contract() {
     }
 
-    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, Set<ContractDetail> contractDetailSet, int flag, String listAttachService) {
+    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, List<ContractDetail> contractDetailList, int flag, String listAttachService) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
@@ -48,22 +48,11 @@ public class Contract {
         this.employee = employee;
         this.customer = customer;
         this.services = services;
-        this.contractDetailSet = contractDetailSet;
+        this.contractDetailList = contractDetailList;
         this.flag = flag;
         this.listAttachService = listAttachService;
     }
 
-    public Contract(Long contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, Services services, Set<ContractDetail> contractDetailSet) {
-        this.contractId = contractId;
-        this.contractStartDate = contractStartDate;
-        this.contractEndDate = contractEndDate;
-        this.contractDeposit = contractDeposit;
-        this.contractTotalMoney = contractTotalMoney;
-        this.employee = employee;
-        this.customer = customer;
-        this.services = services;
-        this.contractDetailSet = contractDetailSet;
-    }
 
     public String getListAttachService() {
         return listAttachService;
@@ -145,11 +134,11 @@ public class Contract {
         this.services = services;
     }
 
-    public Set<ContractDetail> getContractDetailSet() {
-        return contractDetailSet;
+    public List<ContractDetail> getContractDetailList() {
+        return contractDetailList;
     }
 
-    public void setContractDetailSet(Set<ContractDetail> contractDetailSet) {
-        this.contractDetailSet = contractDetailSet;
+    public void setContractDetailList(List<ContractDetail> contractDetailList) {
+        this.contractDetailList = contractDetailList;
     }
 }

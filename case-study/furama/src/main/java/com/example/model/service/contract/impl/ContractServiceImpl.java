@@ -1,6 +1,7 @@
 package com.example.model.service.contract.impl;
 
 import com.example.model.entity.Contract;
+import com.example.model.entity.ContractDetail;
 import com.example.model.entity.Customer;
 import com.example.model.repository.contract.IContractRepository;
 import com.example.model.service.contract.IContractService;
