@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid bg-light border ">
+    <form action="/ticket/create" th:object="${ticketDto}" method="post">
+        <div class="alert alert-info m-5" role="alert">
+            <h4 class="alert-heading">Please enter the information below !</h4>
+            <hr>
+            <div style="margin: 0 7%">
+                <label class="col-md-4 control-label ">Code</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                    </div>
+                    <input type="text" th:field="*{code}" class="form-control"/>
+                </div>
+                <p th:if="${messageCode}">
+                    <span th:text="${messageCode}" style="color: red"></span>
+                </p>
+                <div th:if="${#fields.hasErrors('code')}" th:errors="*{code}"
+                     style="color: red">Error
+                </div>
+                <label class="col-md-4 control-label ">Datetime</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                    </div>
+                    <input type="date" th:field="*{datetime}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('datetime')}" th:errors="*{datetime}"
+                     style="color: red">Error
+                </div>
+                <label class="col-md-4 control-label ">Ticket</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                    </div>
+                    <input type="text" th:field="*{ticket}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('ticket')}" th:errors="*{ticket}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">Movie</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><img src="/image/icon2.gif"></div>
+                    </div>
+                    <select th:field="*{movie}" class="custom-select">
+                        <option th:each="c : ${movieList}" th:value="${c.id}"
+                                th:text="${c.movieName}"></option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="mb-0" style="margin: 0 90%">
+                <button type="submit" class="btn btn-warning m-2">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/jquery/jquery-3.5.1.min.js"></script>
+<script src="/jquery/popper.min.js"></script>
+<script src="/bootstrap4/js/bootstrap.js"></script>
+</body>
+</html>
